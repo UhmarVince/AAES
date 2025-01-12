@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    background-color: rgb(33, 33, 33);
+}
+.header{
+    background-color: black;
+    height: 60px;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    border-bottom: rgb(255, 255, 255) solid 0.5px;
+}
+.head1{
+    flex-grow: 1;
+    font-weight: bold;
+    font-size: large;
+}
+.head5{
+    padding-right: 10px;}
+#logo{
+    width: 30px;
+}

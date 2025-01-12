@@ -1,0 +1,69 @@
+.head4 {
+    font-size: 3rem;
+    font-weight: bold;
+    position: relative;
+    color: white;
+    animation: glitch-skew 1.5s infinite;
+  }
+
+  .head4::before,
+  .head4::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    overflow: hidden;
+    clip-path: inset(0);
+    animation: glitch 1.5s infinite;
+  }
+
+  .head4::before {
+    color: red;
+    transform: translate(2px, -2px);
+    animation-delay: 0.1s;
+  }
+
+  .head4::after {
+    color: cyan;
+    transform: translate(-2px, 2px);
+    animation-delay: 0.2s;
+  }
+
+  @keyframes glitch {
+    0% {
+      clip-path: inset(0);
+      transform: translate(0);
+    }
+    10%, 20% {
+      clip-path: inset(10% 0 30% 0);
+      transform: translate(-5px, 5px);
+    }
+    30%, 40% {
+      clip-path: inset(50% 0 20% 0);
+      transform: translate(5px, -5px);
+    }
+    50%, 60% {
+      clip-path: inset(30% 0 50% 0);
+      transform: translate(-5px, -5px);
+    }
+    70%, 80% {
+      clip-path: inset(10% 0 40% 0);
+      transform: translate(5px, 5px);
+    }
+    90%, 100% {
+      clip-path: inset(0);
+      transform: translate(0);
+    }
+  }
+
+  @keyframes glitch-skew {
+    0%, 100% {
+      transform: skew(0deg);
+    }
+    50% {
+      transform: skew(2deg);
+    }
+  }
