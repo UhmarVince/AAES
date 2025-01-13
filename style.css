@@ -128,4 +128,12 @@ body{
 .fourthPart{
     background-color: white;
     height: 500px;
+    padding: 20px;
+}
+.headings1{
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
 }
