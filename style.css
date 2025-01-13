@@ -140,10 +140,36 @@ body{
 #talisay{
     width: 300px;
     border-radius: 20px;
+    border-bottom: solid 5px rgb(56, 169, 255);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+#talisay:hover {
+    transform: translateX(-5px) scale(1.05); /* Slight scale for subtle floating effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
 }
 #cruz{
     width: 300px;
     border-radius: 20px;
+    border-bottom: solid 5px rgb(255, 25, 217);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+#cruz:hover {
+    transform: translateX(-5px) scale(1.05); /* Slight scale for subtle floating effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+#arora23{
+    width: 300px;
+    border-radius: 20px;
+    border-bottom: solid 5px rgb(56, 169, 255);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+#arora23:hover {
+    transform: translateX(-5px) scale(1.05); /* Slight scale for subtle floating effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
 }
 .gallery{
     display: flex;
