@@ -29,3 +29,11 @@ rollDown3.addEventListener('click', rollingThunder3);
 function rollingThunder3() {
   document.getElementById("sixthPart").scrollIntoView({ behavior: "smooth" });
 }
+
+let rollDown4 = document.getElementById('herobutton');
+
+rollDown4.addEventListener('click', rollingThunder4);
+
+function rollingThunder4() {
+  document.getElementById("thirdPart").scrollIntoView({ behavior: "smooth" });
+}
