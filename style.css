@@ -240,10 +240,33 @@ body{
 }
 .sixthPart{
     background-color: rgb(228, 228, 228);
-    height: 200px;
+    height: 160px;
     color: white;
 }
 #logoFoot{
     width: 100px;
     padding: 30px;
+}
+.six{
+    display: flex;
+    align-items: center;
+}
+.aaes{
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+#link{
+    width: 50px;
+}
+.link{
+    flex-grow: 2;
+    margin-left: 400px;
+    display: flex;
+    align-items: center;
+}
+#fb{
+    width: 50px;
+}
+#ig{
+    width: 50px;
 }
