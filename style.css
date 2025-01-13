@@ -6,6 +6,7 @@ body{
     body {
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
     }
 }
 .header{
@@ -93,7 +94,7 @@ body{
 }
 @media (max-width: 900px) {
     .another {
-        width: 600px;
+        width: 550px;
     }
 }
 .overlay-content {
