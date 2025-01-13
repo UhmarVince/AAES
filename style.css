@@ -15,7 +15,8 @@ body{
     align-items: center;
     gap: 20px;
     font-family: 'Courier New', Courier, monospace;
-    border-bottom: rgb(255, 255, 255) solid 1.5px;
+    border-bottom: solid 1.5px;
+    border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
 .head1{
     flex-grow: 1;
@@ -88,7 +89,7 @@ body{
     border-radius: 10px;
     padding: 6px;  
     color: rgb(0, 0, 0);
-    border: rgb(255, 255, 255) solid 1px;
+    border-bottom: solid 1.5px;
     font-family:Arial, Helvetica, sans-serif;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
@@ -126,7 +127,7 @@ body{
     font-size: 20px;
 }
 .fourthPart{
-    background-color: white;
+    background-color: rgb(221, 221, 221);
     height: 470px;
     padding: 20px;
 }
