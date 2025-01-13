@@ -71,7 +71,8 @@ body{
 }
 @media (max-width: 900px) {
     .overlay-content {
-        padding-right: 150px;
+        padding-right: 180px;
+        font-size: 15px;
     }
 }
 
@@ -117,13 +118,19 @@ body{
 }
 @media (max-width: 900px) {
     .secondPart {
-        margin-top: 200px;
+        margin-top: 0px;
+        padding-bottom: 50px;
     }
 }
 .thirdPart{
     background-color: black;
     height: 450px;
     padding: 20px;
+}
+@media (max-width: 900px) {
+    .thirdPart {
+        height: 600px;
+    }
 }
 .headings{
     color: white;
@@ -147,6 +154,11 @@ body{
     background-color: rgb(221, 221, 221);
     height: 470px;
     padding: 20px;
+}
+@media (max-width: 900px) {
+    .fourthPart {
+        margin-top: 0px;
+    }
 }
 .headings1{
     color: rgb(0, 0, 0);
