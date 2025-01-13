@@ -137,3 +137,16 @@ body{
     font-size: 30px;
     font-weight: bold;
 }
+#talisay{
+    width: 300px;
+    border-radius: 20px;
+}
+#cruz{
+    width: 300px;
+    border-radius: 20px;
+}
+.gallery{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
