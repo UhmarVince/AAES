@@ -61,3 +61,147 @@
       transform: scale(1);
     }
   }
+  #wave {
+    display: inline-block;
+    color: #ffffff;
+  }
+  
+  @keyframes wave {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  #wave span {
+    display: inline-block;
+    font-size: 3rem;
+    animation: wave 1.5s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+  }
+  
+  /* Add delay for each span, using the pattern below */
+  #wave span:nth-child(1) { --i: 0; }
+  #wave span:nth-child(2) { --i: 1; }
+  #wave span:nth-child(3) { --i: 2; }
+  #wave span:nth-child(4) { --i: 3; }
+  #wave span:nth-child(5) { --i: 4; }
+  #wave span:nth-child(6) { --i: 5; }
+  #wave span:nth-child(7) { --i: 6; }
+  #wave span:nth-child(8) { --i: 7; }
+  #wave span:nth-child(9) { --i: 8; }
+  #wave span:nth-child(10) { --i: 9; }
+  #wave span:nth-child(11) { --i: 10; }
+  #wave span:nth-child(12) { --i: 11; }
+  #wave span:nth-child(13) { --i: 12; }
+  #wave span:nth-child(14) { --i: 13; }
+  #wave span:nth-child(15) { --i: 14; }
+  #wave span:nth-child(16) { --i: 15; }
+  #wave span:nth-child(17) { --i: 16; }
+  #wave span:nth-child(18) { --i: 17; }
+  #wave span:nth-child(19) { --i: 18; }
+  #wave span:nth-child(20) { --i: 19; }
+  #wave span:nth-child(21) { --i: 20; }
+  #wave span:nth-child(22) { --i: 21; }
+  #wave span:nth-child(23) { --i: 22; }
+  #wave span:nth-child(24) { --i: 23; }
+  #wave span:nth-child(25) { --i: 24; }
+  #wave span:nth-child(26) { --i: 25; }
+  #wave span:nth-child(27) { --i: 26; }
+  #wave span:nth-child(28) { --i: 27; }
+  #wave span:nth-child(29) { --i: 28; }
+  #wave span:nth-child(30) { --i: 29; }
+  #wave span:nth-child(31) { --i: 30; }
+  #wave span:nth-child(32) { --i: 31; }
+  #wave span:nth-child(33) { --i: 32; }
+  #wave span:nth-child(34) { --i: 33; }
+  #wave span:nth-child(35) { --i: 34; }
+  #wave span:nth-child(36) { --i: 35; }
+  #wave span:nth-child(37) { --i: 36; }
+  #wave span:nth-child(38) { --i: 37; }
+  #wave span:nth-child(39) { --i: 38; }
+  #wave span:nth-child(40) { --i: 39; }
+  #wave span:nth-child(41) { --i: 40; }
+  #wave span:nth-child(42) { --i: 41; }
+  #wave span:nth-child(43) { --i: 42; }
+  #wave span:nth-child(44) { --i: 43; }
+  #wave span:nth-child(45) { --i: 44; }
+  #wave span:nth-child(46) { --i: 45; }
+  #wave span:nth-child(47) { --i: 46; }
+  #wave span:nth-child(48) { --i: 47; }
+  #wave span:nth-child(49) { --i: 48; }
+  #wave span:nth-child(50) { --i: 49; }
+  #wave span:nth-child(51) { --i: 50; }
+  #wave span:nth-child(52) { --i: 51; }
+  #wave span:nth-child(53) { --i: 52; }
+  #wave span:nth-child(54) { --i: 53; }
+  #wave span:nth-child(55) { --i: 54; }
+  #wave span:nth-child(56) { --i: 55; }
+  #wave span:nth-child(57) { --i: 56; }
+  #wave span:nth-child(58) { --i: 57; }
+  #wave span:nth-child(59) { --i: 58; }
+  #wave span:nth-child(60) { --i: 59; }
+  #wave span:nth-child(61) { --i: 60; }
+  #wave span:nth-child(62) { --i: 61; }
+  #wave span:nth-child(63) { --i: 62; }
+  #wave span:nth-child(64) { --i: 63; }
+  #wave span:nth-child(65) { --i: 64; }
+  #wave span:nth-child(66) { --i: 65; }
+  #wave span:nth-child(67) { --i: 66; }
+  #wave span:nth-child(68) { --i: 67; }
+  #wave span:nth-child(69) { --i: 68; }
+  #wave span:nth-child(70) { --i: 69; }
+  #wave span:nth-child(71) { --i: 70; }
+  #wave span:nth-child(72) { --i: 71; }
+  #wave span:nth-child(73) { --i: 72; }
+  #wave span:nth-child(74) { --i: 73; }
+  #wave span:nth-child(75) { --i: 74; }
+  #wave span:nth-child(76) { --i: 75; }
+  #wave span:nth-child(77) { --i: 76; }
+  #wave span:nth-child(78) { --i: 77; }
+  #wave span:nth-child(79) { --i: 78; }
+  #wave span:nth-child(80) { --i: 79; }
+  #wave span:nth-child(81) { --i: 80; }
+  #wave span:nth-child(82) { --i: 81; }
+  #wave span:nth-child(83) { --i: 82; }
+  #wave span:nth-child(84) { --i: 83; }
+  #wave span:nth-child(85) { --i: 84; }
+  #wave span:nth-child(86) { --i: 85; }
+  #wave span:nth-child(87) { --i: 86; }
+  #wave span:nth-child(88) { --i: 87; }
+  #wave span:nth-child(89) { --i: 88; }
+  #wave span:nth-child(90) { --i: 89; }
+  #wave span:nth-child(91) { --i: 90; }
+  #wave span:nth-child(92) { --i: 91; }
+  #wave span:nth-child(93) { --i: 92; }
+  #wave span:nth-child(94) { --i: 93; }
+  #wave span:nth-child(95) { --i: 94; }
+  #wave span:nth-child(96) { --i: 95; }
+  #wave span:nth-child(97) { --i: 96; }
+  #wave span:nth-child(98) { --i: 97; }
+  #wave span:nth-child(99) { --i: 98; }
+  #wave span:nth-child(100) { --i: 99; }
+
+  #slideUpDiv {
+    position: relative;
+    transform: translateY(100px); /* Start 100px below */
+    opacity: 0; /* Start as invisible */
+    transition: transform 1s ease-out, opacity 1s ease-out; /* Smooth transition */
+  }
+  
+  #slideUpDiv.show {
+    transform: translateY(0); /* Slide to the original position */
+    opacity: 1; /* Make visible */
+  }
+  

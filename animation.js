@@ -105,3 +105,13 @@ function shuffleText7(element7, text, duration = 2000) {
 }
 
 shuffleText(textElement7, originalText7);
+
+window.addEventListener('scroll', function() {
+  var element = document.getElementById('slideUpDiv');
+  var position = element.getBoundingClientRect();
+
+  // Check if the element is in view (in the viewport)
+  if (position.top <= window.innerHeight && position.bottom >= 0) {
+    element.classList.add('show');
+  }
+});
