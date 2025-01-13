@@ -63,7 +63,8 @@
   }
   #wave {
     display: inline-block;
-    color: #ffffff;
+    color: #929292;
+    text-align: center;
   }
   
   @keyframes wave {
@@ -87,8 +88,8 @@
   #wave span {
     display: inline-block;
     font-size: 3rem;
-    animation: wave 1.5s ease-in-out infinite;
-    animation-delay: calc(0.1s * var(--i));
+    animation: wave 0.5s ease-in-out infinite;
+    animation-delay: calc(0.01s * var(--i));
   }
   
   /* Add delay for each span, using the pattern below */
