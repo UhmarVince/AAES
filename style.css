@@ -158,6 +158,7 @@ body{
 @media (max-width: 900px) {
     .fourthPart {
         margin-top: 0px;
+        height: 1100px;
     }
 }
 .headings1{
@@ -206,16 +207,33 @@ body{
     gap: 30px;
     justify-content: center;
 }
+@media (max-width: 900px) {
+    .gallery {
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+    }
+}
 .fifthPart{
     background-color: rgb(0, 0, 0);
     height: 700px;
     padding: 20px;
+}
+@media (max-width: 900px) {
+    .fifthPart {
+        height: 1400px;
+    }
 }
 .fifth{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 100px;
+}
+@media (max-width: 900px) {
+    .fifth {
+        flex-direction: column;
+    }
 }
 .headings2{
     color: white;
@@ -268,12 +286,17 @@ body{
 }
 .sixthPart{
     background-color: rgb(228, 228, 228);
-    height: 160px;
+    height: 130px;
     color: white;
 }
 #logoFoot{
-    width: 100px;
+    width: 130px;
     padding: 30px;
+}
+@media (max-width: 900px) {
+    #logoFoot {
+        width: 50px;
+    }
 }
 .six{
     display: flex;
@@ -283,8 +306,18 @@ body{
     font-family: 'Courier New', Courier, monospace;
     color: black;
 }
+@media (max-width: 900px) {
+    .aaes {
+        font-size: 10px;
+    }
+}
 #link{
     width: 50px;
+}
+@media (max-width: 900px) {
+    #link {
+        width: 20px;
+    }
 }
 .link{
     flex-grow: 2;
@@ -292,9 +325,24 @@ body{
     display: flex;
     align-items: center;
 }
+@media (max-width: 900px) {
+    .link {
+        margin-left: 50px;
+    }
+}
 #fb{
     width: 50px;
 }
+@media (max-width: 900px) {
+    #fb {
+        width: 20px;
+    }
+}
 #ig{
     width: 50px;
+}
+@media (max-width: 900px) {
+    #ig {
+        width: 20px;
+    }
 }
