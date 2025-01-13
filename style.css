@@ -91,6 +91,11 @@ body{
     flex-direction: row;
     align-items: center;
 }
+@media (max-width: 900px) {
+    .another {
+        width: 600px;
+    }
+}
 .overlay-content {
     margin-left: 350px; /* Centers horizontally */
     transform: translateX(-50%); /* Only horizontally center it */
@@ -105,8 +110,8 @@ body{
 }
 @media (max-width: 900px) {
     .overlay-content {
-        padding-right: 180px;
         font-size: 15px;
+        margin-left: 210px; 
     }
 }
 
