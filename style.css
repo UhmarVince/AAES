@@ -178,7 +178,6 @@ body{
 @media (max-width: 900px) {
     .secondPart {
         margin-top: 0px;
-        padding-bottom: 50px;
         height: 980px;
     }
 }
@@ -190,6 +189,7 @@ body{
 @media (max-width: 900px) {
     .thirdPart {
         height: 800px;
+        padding-bottom: 100px;
     }
 }
 .headings{
