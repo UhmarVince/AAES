@@ -199,6 +199,8 @@
     transform: translateY(100px); /* Start 100px below */
     opacity: 0; /* Start as invisible */
     transition: transform 1s ease-out, opacity 1s ease-out; /* Smooth transition */
+    width: 1000px;
+    text-align: justify;
   }
   
   #slideUpDiv.show {
