@@ -200,7 +200,7 @@
     opacity: 0; /* Start as invisible */
     transition: transform 1s ease-out, opacity 1s ease-out; /* Smooth transition */
     width: 1000px;
-    text-align: justify;
+    text-align: left;
   }
   @media (max-width: 900px) {
     #slideUpDiv {
