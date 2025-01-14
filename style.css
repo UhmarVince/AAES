@@ -276,12 +276,12 @@ body{
 }
 .fifthPart{
     background-color: rgb(0, 0, 0);
-    height: 700px;
+    height: 1400px;
     padding-top: 50px;
 }
 @media (max-width: 900px) {
     .fifthPart {
-        height: 1400px;
+        height: 2500px;
         padding-left: 20px;
     }
 }
