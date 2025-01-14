@@ -112,7 +112,7 @@ body{
 @media (max-width: 900px) {
     .overlay-content {
         font-size: 15px;
-        margin-left: 210px; 
+        margin-left: 200px; 
     }
 }
 
@@ -264,6 +264,7 @@ body{
 @media (max-width: 900px) {
     .fifthPart {
         height: 1400px;
+        padding-left: 20px;
     }
 }
 .fifth{
