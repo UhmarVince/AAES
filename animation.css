@@ -202,7 +202,11 @@
     width: 1000px;
     text-align: justify;
   }
-  
+  @media (max-width: 900px) {
+    #slideUpDiv {
+      max-width: 100%;
+    }
+}
   #slideUpDiv.show {
     transform: translateY(0); /* Slide to the original position */
     opacity: 1; /* Make visible */
