@@ -3,8 +3,9 @@ let rollDown = document.getElementById('head2');
 rollDown.addEventListener('click', rollingThunder);
 
 function rollingThunder() {
-  document.getElementById("secondPart").scrollIntoView({ behavior: "smooth" });
+  window.location.href = "https://aa-engineers.net/services.html";
 }
+
 
 let rollDown1 = document.getElementById('head3');
 
