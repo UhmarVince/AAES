@@ -172,8 +172,9 @@ body{
 }
 .secondPart{
     background-color: rgb(255, 255, 255);
-    height: 1000px;
+    height: 1100px;
     padding-top: 50px;
+    padding-left: 50px;
 }
 @media (max-width: 900px) {
     .secondPart {
@@ -236,7 +237,7 @@ body{
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 .imageService{
-    width: 300px;
+    width: 250px;
     border-radius: 20px;
     border-bottom: solid 2px rgb(56, 169, 255);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
@@ -360,7 +361,6 @@ body{
 .sixthPart{
     background-color: rgb(228, 228, 228);
     height: 200px;
-    margin-top: 500px;
     color: white;
 }
 @media (max-width: 900px) {
