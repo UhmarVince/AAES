@@ -43,6 +43,15 @@ body{
     font-weight: bold;
     font-size: large;
 }
+.head2{
+    cursor: pointer;
+}
+.head3{
+    cursor: pointer;
+}
+.head4{
+    cursor: pointer;
+}
 @media (max-width: 900px) {
     #head2 {
         font-size: 12px;
@@ -64,7 +73,9 @@ body{
     }
 }
 .head5{
-    padding-right: 10px;}
+    padding-right: 10px;
+    cursor: pointer;
+}
 #logo{
     width: 40px;
 }
