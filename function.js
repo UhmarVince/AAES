@@ -12,7 +12,7 @@ let rollDown1 = document.getElementById('head3');
 rollDown1.addEventListener('click', rollingThunder1);
 
 function rollingThunder1() {
-  window.location.href = "https://aa-engineers.net/about.html";
+  window.location.href = "https://aa-engineers.net/projects.html";
 }
 
 let rollDown2 = document.getElementById('head4');
@@ -28,7 +28,7 @@ let rollDown3 = document.getElementById('head5');
 rollDown3.addEventListener('click', rollingThunder3);
 
 function rollingThunder3() {
-  window.location.href = "https://aa-engineers.net/about.html";
+  window.location.href = "https://aa-engineers.net/contact.html";
 }
 
 let rollDown4 = document.getElementById('herobutton');
