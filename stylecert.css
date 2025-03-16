@@ -232,14 +232,14 @@ body{
 }
 .secondPart{
     background-color: rgb(255, 255, 255);
-    height: 1700px;
+    height: 2500px;
     padding-top: 50px;
     padding-left: 50px;
 }
 @media (max-width: 1000px) {
     .secondPart {
         margin-top: 0px;
-        height: 1400px;
+        height: 1700px;
         width: 100%;
         padding-left: 5px;
         padding-bottom: 50px;
@@ -375,7 +375,9 @@ body{
 }
 @media (max-width: 900px) {
     .imageService {
-        visibility: hidden
+        visibility: visible;
+        width: 300px;
+        margin-right: 70px;
     }
 }
 .imageService:hover {
