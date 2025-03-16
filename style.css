@@ -44,7 +44,9 @@ body{
 }
 .head3{
     cursor: pointer;
+
 }
+/---------------------------------------
 .head4 {
     position: relative;
     display: inline-block;
@@ -54,6 +56,7 @@ body{
     cursor: pointer;
     padding: 10px;
     background-color: #f1f1f1;
+    color: #000;
     border: 1px solid #ccc;
     display: inline-block;
 }
@@ -61,17 +64,20 @@ body{
 .dropdown-content {
     display: none;
     position: absolute;
-    top: 100%; /* Positions it directly below the "About" */
-    left: 0;
+    top: 40px; /* ✅ Increased distance to avoid flicker */
+    left: 10;
     background-color: #ffffff;
     min-width: 160px;
     box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-    z-index: 10;
+    z-index: 9000; /* ✅ High enough to avoid overlap issues */
     border: 1px solid #ddd;
+    transition: opacity 0.2s ease-in-out; /* ✅ Added smooth transition */
+    opacity: 0;
+    pointer-events: none;
 }
 
 .dropdown-content a {
-    padding: 10px;
+    padding: 12px 16px;
     text-decoration: none;
     color: #333;
     display: block;
@@ -82,10 +88,14 @@ body{
     background-color: #f0f0f0;
 }
 
-/* ✅ Fix: Ensure the dropdown appears ONLY on hover */
-.dropdown:hover .dropdown-content {
+/* ✅ Ensure the dropdown remains open when hovering over it */
+.head4:hover .dropdown-content {
     display: block;
+    opacity: 1;
+    pointer-events: auto;
 }
+/-------------------------------------------------------------
+
 @media (max-width: 900px) {
     #head2 {
         font-size: 12px;

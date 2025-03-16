@@ -15,13 +15,7 @@ function rollingThunder1() {
   window.location.href = "https://aa-engineers.net/projects.html";
 }
 
-let rollDown2 = document.getElementById('head4');
 
-rollDown2.addEventListener('click', rollingThunder2);
-
-function rollingThunder2() {
-  window.location.href = "https://aa-engineers.net/about.html";
-}
 
 let rollDown3 = document.getElementById('head5');
 
@@ -38,3 +32,8 @@ rollDown4.addEventListener('click', rollingThunder4);
 function rollingThunder4() {
   window.location.href = "https://aa-engineers.net/about.html";
 }
+
+
+
+
+
