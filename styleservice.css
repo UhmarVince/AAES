@@ -49,8 +49,52 @@ body{
 .head3{
     cursor: pointer;
 }
-.head4{
+.head4 {
+    position: relative;
+    display: inline-block;
+}
+
+.About {
     cursor: pointer;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #000;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px; /* ✅ Increased distance to avoid flicker */
+    left: 10;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    z-index: 9000; /* ✅ High enough to avoid overlap issues */
+    border: 1px solid #ddd;
+    transition: opacity 0.2s ease-in-out; /* ✅ Added smooth transition */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+
+/* ✅ Ensure the dropdown remains open when hovering over it */
+.head4:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
 }
 @media (max-width: 900px) {
     #head2 {
