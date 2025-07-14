@@ -26,7 +26,7 @@ body{
     justify-content: center;
     align-items: center;
     gap: 20px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     border-bottom: solid 1.5px;
     border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
@@ -165,7 +165,7 @@ body{
     font-weight: bolder;
     padding: 20px; /* Optional: Padding around the text */
     border-radius: 20px; /* Optional: Rounded corners */
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
     width: 500px;
 }
@@ -187,7 +187,7 @@ body{
     font-weight: bolder;
     padding: 20px; /* Optional: Padding around the text */
     border-radius: 20px; /* Optional: Rounded corners */
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
@@ -265,7 +265,7 @@ body{
 }
 .caption{
     color: white;
-    font-family:'Courier New', Courier, monospace;
+    font-family:Arial, Helvetica, sans-serif, monospace;
     text-align: center;
     font-size: 15px;
 }
@@ -316,7 +316,7 @@ body{
 }
 .here{
     padding: 20px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     text-align: center;
 }
 @media (max-width: 900px) {
@@ -336,7 +336,7 @@ body{
 }
 .par{
     padding: 20px; 
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     width: 600px;
 }
 @media (max-width: 900px) {
@@ -477,20 +477,20 @@ body{
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
 }
 .details{
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     color: rgb(255, 255, 255);
 }
 .headProf{
     color: rgb(56, 169, 255);
     padding: 0;
     margin: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
 }
 .headProf1{
     color: rgb(255, 25, 217);
     padding: 0;
     margin: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
 }
 .sixthPart{
     background-color: rgb(228, 228, 228);
@@ -526,7 +526,7 @@ body{
     }
 }
 .aaes{
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif, monospace;
     color: black;
 }
 @media (max-width: 900px) {
