@@ -342,7 +342,49 @@ body{
 
 
 
+.glass-button {
+    position: relative;
+    padding: 14px 36px;
+    font-size: 18px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
+  }
 
+  .glass-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    animation: shine 2.5s infinite;
+    z-index: 2;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -75%;
+    }
+    100% {
+      left: 125%;
+    }
+  }
+  
+  
 
 
 
@@ -352,17 +394,14 @@ body{
 
 
 .herobutton{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(121, 217, 255);
     font-weight: bold;
     font-size: 20px;
     border-radius: 10px;
-    padding: 6px;  
-    padding-right: 20px;
-    color: rgb(0, 0, 0);
-    border-bottom: solid 1.5px;
+    padding: 20px;  
+    color: rgb(255, 255, 255);
     font-family:Arial, Helvetica, sans-serif;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    transition: transform 0.3s ease; /* Smooth transition */
 }
 .herobutton:hover {
     transform: translateX(-5px) scale(1.05); /* Slight scale for subtle floating effect */
