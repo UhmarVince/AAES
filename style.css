@@ -233,7 +233,7 @@ body{
 }
 .secondPart{
     background-color: rgb(255, 255, 255);
-    height: 1000px;
+    height: 600px;
     padding-top: 50px;
 }
 @media (max-width: 900px) {
