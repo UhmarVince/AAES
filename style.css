@@ -194,6 +194,8 @@ body{
     border-radius: 20px; /* Optional: Rounded corners */
     font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    border-left: solid 1.5px;
+    border-image: linear-gradient(to top, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
 
 .overlay-content1:hover {
@@ -226,6 +228,8 @@ body{
     font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
     width: 500px;
+    border-right: solid 1.5px;
+    border-image: linear-gradient(to bottom, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
 @media (max-width: 900px) {
     .overlay-content {
