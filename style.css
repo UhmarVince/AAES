@@ -176,7 +176,7 @@ body{
 
 @media (max-width: 1000px) {
     .overlay-content22 {
-        width: 370px;
+        width: 350px;
         margin-left: 250px; 
     }
 }
@@ -230,9 +230,8 @@ body{
 @media (max-width: 900px) {
     .overlay-content {
         font-size: 15px;
-        margin-left: 550px;
         width: 480px;
-        padding-right: 0px;
+        margin-left: 550px; 
     }
 }
 
