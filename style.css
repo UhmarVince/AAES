@@ -231,7 +231,8 @@ body{
     .overlay-content {
         font-size: 15px;
         margin-left: 550px;
-        width: 480px; 
+        width: 480px;
+        padding-right: 0px;
     }
 }
 
