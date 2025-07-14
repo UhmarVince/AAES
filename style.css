@@ -147,11 +147,12 @@ body{
 }
 .another{
     position: absolute; /* Places the div on top of the image */
-    top: 200px; /* Adjusts the vertical position */
+    top: 150px; /* Adjusts the vertical position */
     padding-bottom: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 150px;
 }
 @media (max-width: 900px) {
     .another {
@@ -161,13 +162,11 @@ body{
 }
 
 .overlay-content22 {
-    margin-left: 350px; /* Centers horizontally */
     transform: translateX(-50%); /* Only horizontally center it */
     color: rgb(0, 0, 0); /* Makes the text visible */
     font-size: large;
     font-weight: bolder;
-    padding: 20px; /* Optional: Padding around the text */
-    border-radius: 20px; /* Optional: Rounded corners */
+    border-radius: 50px; /* Optional: Rounded corners */
     font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
     width: 800px;
@@ -176,8 +175,7 @@ body{
 
 @media (max-width: 1000px) {
     .overlay-content22 {
-        font-size: 15px;
-        margin-left: 200px;
+        width: 400px;
     }
 }
 
