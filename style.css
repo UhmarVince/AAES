@@ -177,7 +177,9 @@ body{
 @media (max-width: 1000px) {
     .overlay-content22 {
         width: 350px;
-        margin-left: 200px; 
+        margin-left: 200px;
+        border-top: solid 1.5px;
+        border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
     }
 }
 
@@ -263,8 +265,15 @@ body{
 .fifthcontain {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 20px;
 }
-
+@media (max-width: 900px) {
+    .fifthcontain {
+        font-size: 15px;
+        flex-direction: column;
+    }
+}
 
 
 
@@ -282,13 +291,11 @@ body{
     width: 600px;
     border: solid 1.5px;
     border-image: linear-gradient(to bottom, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
-    gap: 20px;
 }
 @media (max-width: 900px) {
-    .overlay-content {
+    .overlay-content34 {
         font-size: 15px;
-        width: 480px;
-        margin-left: 550px; 
+        width: 300px;
     }
 }
 
