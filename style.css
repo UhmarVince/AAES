@@ -156,8 +156,55 @@ body{
 @media (max-width: 900px) {
     .another {
         width: 550px;
+        flex-direction: column;
     }
 }
+
+.overlay-content22 {
+    margin-left: 350px; /* Centers horizontally */
+    transform: translateX(-50%); /* Only horizontally center it */
+    color: rgb(0, 0, 0); /* Makes the text visible */
+    font-size: large;
+    font-weight: bolder;
+    padding: 20px; /* Optional: Padding around the text */
+    border-radius: 20px; /* Optional: Rounded corners */
+    font-family: Arial, Helvetica, sans-serif, monospace;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    width: 800px;
+}
+
+
+@media (max-width: 1000px) {
+    .overlay-content22 {
+        font-size: 15px;
+        margin-left: 200px;
+    }
+}
+
+.overlay-content22:hover {
+    transform: translateX(-50%) scale(1.05); /* Slight scale for subtle floating effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+.overlay-content1 {
+    transform: translateX(-50%); /* Only horizontally center it */
+    color: rgb(255, 255, 255); /* Makes the text visible */
+    font-size: large;
+    font-weight: bolder;
+    padding: 20px; /* Optional: Padding around the text */
+    border-radius: 20px; /* Optional: Rounded corners */
+    font-family: Arial, Helvetica, sans-serif, monospace;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.overlay-content1:hover {
+    transform: translateX(-50%) scale(1.05); /* Slight scale for subtle floating effect */
+}
+
+
+
+
+
+
 .overlay-content {
     margin-left: 350px; /* Centers horizontally */
     transform: translateX(-50%); /* Only horizontally center it */
