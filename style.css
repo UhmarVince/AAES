@@ -148,6 +148,7 @@ body{
 .another{
     position: absolute; /* Places the div on top of the image */
     top: 200px; /* Adjusts the vertical position */
+    padding-bottom: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
