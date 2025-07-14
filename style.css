@@ -158,6 +158,7 @@ body{
     .another {
         width: 550px;
         flex-direction: column;
+        gap: 40px;
     }
 }
 
@@ -175,7 +176,7 @@ body{
 
 @media (max-width: 1000px) {
     .overlay-content22 {
-        width: 400px;
+        width: 370px;
         margin-left: 250px; 
     }
 }
@@ -229,7 +230,8 @@ body{
 @media (max-width: 900px) {
     .overlay-content {
         font-size: 15px;
-        margin-left: 550px; 
+        margin-left: 550px;
+        width: 480px; 
     }
 }
 
