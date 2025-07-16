@@ -354,7 +354,7 @@ a {
     position: relative;
     padding: 14px 36px;
     font-size: 18px;
-    color: white;
+    color: rgb(0, 0, 0);
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 12px;
@@ -449,7 +449,7 @@ a {
 
 .thirdPart{
     background-color: black;
-    height: 450px;
+    height: 500px;
     padding: 50px;
 }
 @media (max-width: 900px) {
@@ -461,36 +461,38 @@ a {
 .headings{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+    text-align: left;
     font-size: 30px;
     font-weight: bold;
 }
 .caption{
     color: white;
     font-family:Arial, Helvetica, sans-serif, monospace;
-    text-align: center;
+    text-align: left;
     font-size: 15px;
 }
 .caption1{
     color: rgb(200, 200, 200);
     font-family:Arial, Helvetica, sans-serif;
     font-size: 15px;
+    text-align: left;
 }
 .fourthPart{
     background-color: rgb(221, 221, 221);
-    height: 470px;
+    height: 750px;
     padding-top: 50px;
 }
 @media (max-width: 900px) {
     .fourthPart {
         margin-top: 0px;
-        height: 1100px;
+        height: 2000px;
     }
 }
 .headings1{
     color: rgb(0, 0, 0);
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+    text-align: left;
+    margin-left: 40px;
     font-size: 30px;
     font-weight: bold;
 }
@@ -531,7 +533,9 @@ a {
 .gallery{
     display: flex;
     gap: 30px;
-    justify-content: center;
+    justify-content: left;
+    margin-left: 40px;
+    flex-wrap: wrap;
 }
 @media (max-width: 900px) {
     .gallery {
