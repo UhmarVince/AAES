@@ -34,6 +34,12 @@ function rollingThunder4() {
 }
 
 
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+
+hamburgerxx.addEventListener('click', () => {
+  navMenu.classList.toggle('show');
+});
 
 
 

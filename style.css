@@ -28,6 +28,9 @@ body{
 }
 .logo{
     padding-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 @media (max-width: 900px) {
     .logo {
@@ -554,17 +557,18 @@ a {
 
 
 /* Default (desktop) */
-.headerxx {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #222;
-  padding: 10px 20px;
 }
 
 .nav-menuxx {
   display: flex;
+  align-items: center;
   gap: 20px;
+  width: auto;
 }
 
 .hamburgerxx {
@@ -593,6 +597,7 @@ a {
 
   .hamburgerxx {
     display: block;
+    margin-right: 10px;
   }
 }
 
