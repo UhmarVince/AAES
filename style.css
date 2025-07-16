@@ -26,6 +26,13 @@ body{
     border-bottom: solid 1.5px;
     border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
+
+@media (max-width: 900px) {
+    .header {
+        font-size: 20px;
+    }
+}
+
 .logo{
     padding-left: 20px;
     display: flex;
@@ -58,9 +65,9 @@ body{
 .About {
     cursor: pointer;
     padding: 10px;
-    background-color: #f1f1f1;
-    color: #000;
-    border: 1px solid #ccc;
+    background-color: black;
+    color: #ffffff;
+    border: 1px solid #000000;
     display: inline-block;
 }
 
@@ -569,6 +576,7 @@ a {
   align-items: center;
   gap: 20px;
   width: auto;
+  font-size: 20px;
 }
 
 .hamburgerxx {
