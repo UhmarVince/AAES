@@ -554,7 +554,7 @@ a {
 
 
 /* Default (desktop) */
-.header {
+.headerxx {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -562,12 +562,12 @@ a {
   padding: 10px 20px;
 }
 
-.nav-menu {
+.nav-menuxx {
   display: flex;
   gap: 20px;
 }
 
-.hamburger {
+.hamburgerxx {
   display: none;
   font-size: 28px;
   color: white;
@@ -576,7 +576,7 @@ a {
 
 /* Mobile view */
 @media (max-width: 768px) {
-  .nav-menu {
+  .nav-menuxx {
     display: none;
     flex-direction: column;
     background: #222;
@@ -587,11 +587,11 @@ a {
     padding: 10px;
   }
 
-  .nav-menu.show {
+  .nav-menuxx.show {
     display: flex;
   }
 
-  .hamburger {
+  .hamburgerxx {
     display: block;
   }
 }
