@@ -485,7 +485,7 @@ a {
 @media (max-width: 900px) {
     .fourthPart {
         margin-top: 0px;
-        height: 450px;
+        height: 400px;
     }
 }
 .headings1{
@@ -582,6 +582,12 @@ a {
     .gallery-containerxx {
         overflow: hidden;
     }
+}
+@media (max-width: 768px) {
+  @keyframes slide {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-500%); } /* slide full width for mobile */
+  }
 }
 
 
