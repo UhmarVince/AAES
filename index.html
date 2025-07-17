@@ -204,8 +204,15 @@
         </div>
 
 
+
+
+
+
+
         
         <div class="thirdPart" id="thirdPart">
+
+            <div class="eq1">
             <p class="headings">Protect your Structures from Earthquakes</p>
             <p class="caption">Create the structural 
                 solutions that is tailored for your structure’s demands – including earthquakes.</p>
@@ -223,7 +230,10 @@
                 ✔ We use real <b>ground motion data</b> from institutions for earthquake simulations.<br><br>
                 ✔ We leverage government-approved spectral maps or <b>mapped earthquake records</b>.<br><br>
                 ✔ We maintain our adherence with the <b>national structural codes</b>.<br><br>
-                ✔ We continually upgrade our knowledge through <b>graduate studies and trainings</b>.
+                ✔ We continually upgrade our knowledge through <b>graduate studies and trainings</b>. <br>
+
+
+
             </p>
 
 
@@ -237,10 +247,48 @@
                 </button>
             </div>
 
+            </div>
+
+
+
+            <div class="eq2">
+
+                <h2 style="color: white;font-family: Arial, Helvetica, sans-serif;">Significant Earthquakes (Past 1 Week)</h2><br>
+                <ul id="quake-list" style="color: white;font-family: Arial, Helvetica, sans-serif;text-align: left;padding-bottom: 20px;">Loading data...</ul>
+
+
+            </div>
 
 
         </div>
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="fourthPart" id="fourthPart">
             <p class="headings1">Featured Projects</p>
 
@@ -408,6 +456,79 @@
       navMenu.classList.toggle('show');
     });
   </script>
+
+
+
+
+
+
+
+
+
+    <script>
+        const feedUrl = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson';
+
+        // Basic continent zones (approximate bounding boxes)
+        const continents = {
+            "North America": { lat: [7, 83], lon: [-168, -52] },
+            "South America": { lat: [-56, 13], lon: [-81, -34] },
+            "Europe": { lat: [36, 71], lon: [-10, 60] },
+            "Africa": { lat: [-35, 37], lon: [-20, 52] },
+            "Asia": { lat: [1, 77], lon: [60, 180] },
+            "Oceania": { lat: [-50, 0], lon: [110, 180] }
+        };
+
+        fetch(feedUrl)
+            .then(response => response.json())
+            .then(data => {
+                const quakes = data.features;
+                const continentTopQuakes = {};
+
+                quakes.forEach(eq => {
+                    const mag = eq.properties.mag;
+                    const place = eq.properties.place;
+                    const time = new Date(eq.properties.time).toLocaleString();
+                    const url = eq.properties.url;
+                    const [lon, lat] = eq.geometry.coordinates;
+
+                    for (const [continent, bounds] of Object.entries(continents)) {
+                        if (lat >= bounds.lat[0] && lat <= bounds.lat[1] &&
+                            lon >= bounds.lon[0] && lon <= bounds.lon[1]) {
+                            
+                            if (!continentTopQuakes[continent] || mag > continentTopQuakes[continent].mag) {
+                                continentTopQuakes[continent] = { mag, place, time, url };
+                            }
+                        }
+                    }
+                });
+
+                const list = document.getElementById('quake-list');
+                list.innerHTML = '';
+
+                if (Object.keys(continentTopQuakes).length === 0) {
+                    list.innerHTML = '<li>No earthquakes in the past hour.</li>';
+                }
+
+                for (const [continent, quake] of Object.entries(continentTopQuakes)) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${continent}</strong><br>
+                                    M ${quake.mag} - ${quake.place}<br>
+                                    <small>${quake.time}</small><br>
+                                    <a href="${quake.url}" target="_blank">Details</a>`;
+                    list.appendChild(li);
+                }
+            })
+            .catch(error => {
+                document.getElementById('quake-list').innerHTML = 'Error loading data.';
+                console.error(error);
+            });
+    </script>
+
+
+
+
+
+
 
 
     </body>
