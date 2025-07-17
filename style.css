@@ -462,15 +462,14 @@ a {
     height: 500px;
     padding: 50px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     align-items:baseline;
-    row-gap: 30px;
-    padding-bottom: 10px;
+    gap: 100px;
+    padding-bottom: 100px;
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .thirdPart {
-        height: 1000px;
+        height: 1100px;
         padding-bottom: 10px;
         flex-direction: column;
     }
