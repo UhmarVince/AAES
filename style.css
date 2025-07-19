@@ -715,14 +715,23 @@ a {
 
 
 
-
+.team {
+    background:linear-gradient(to bottom, black, white);
+    padding: 100px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: small;
+    gap: 50px;
+}
 
 
 
 
 
 .fifthPart{
-    background-color: rgb(177, 177, 177);
+    background-color: rgb(255, 255, 255);
     height: 1400px;
     padding-top: 50px;
 }
