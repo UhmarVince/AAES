@@ -232,16 +232,13 @@ body{
 }
 .secondPart{
     background-color: rgb(255, 255, 255);
-    height: 3000px;
+    height: 6200px;
     padding-top: 50px;
-    padding-left: 50px;
 }
 @media (max-width: 1000px) {
     .secondPart {
         margin-top: 0px;
-        height: 2400px;
-        width: 100%;
-        padding-left: 5px;
+        height: 5200px;
         padding-bottom: 50px;
     }
 }
