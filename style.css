@@ -160,10 +160,10 @@ body{
     top: 150px; /* Adjusts the vertical position */
     padding-bottom: 200px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction:row;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 150px;
+    justify-content: center;
 }
 @media (max-width: 900px) {
     .another {
@@ -172,7 +172,23 @@ body{
         gap: 40px;
     }
 }
-
+.image-container{
+    background-color: white;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border: white;
+}
+@media (max-width: 900px) {
+    .image-container {
+        padding-left: 140px;
+        padding-bottom: 125px;
+        padding-top: 0px;
+        border: white;
+    }
+}
 
 .overlay-content22 {
     transform: translateX(-50%); /* Only horizontally center it */
@@ -182,7 +198,7 @@ body{
     border-radius: 50px; /* Optional: Rounded corners */
     font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-    width: 800px;
+    width: 500px;
     border-left: solid 5px;
     border-image: linear-gradient(to bottom, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
@@ -244,8 +260,6 @@ body{
     font-family: Arial, Helvetica, sans-serif, monospace;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
     width: 500px;
-    border-right: solid 1.5px;
-    border-image: linear-gradient(to bottom, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
 @media (max-width: 900px) {
     .overlay-content {
@@ -579,7 +593,8 @@ a {
 .clients{
     background-color: rgb(255, 255, 255);
     border-color: white;
-    padding: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 .client-gallery{
