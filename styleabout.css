@@ -680,6 +680,13 @@ body{
     justify-content: center;
     padding: 30px;
     flex-wrap: wrap;
+    border-top: solid 5px;
+    border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
+}
+@media (max-width: 900px) {
+    .parent {
+    height: 2000px;
+    }
 }
 .description{
     color: rgb(255, 255, 255);
