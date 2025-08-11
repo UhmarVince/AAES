@@ -242,10 +242,9 @@ body{
 @media (max-width: 1000px) {
     .secondPart {
         margin-top: 0px;
-        height: 1400px;
+        height: 1200px;
         width: 100%;
         padding-left: 5px;
-        padding-bottom: 50px;
     }
 }
 .thirdPart{
@@ -290,26 +289,39 @@ body{
 }
 .media1{
     display: flex;
+    justify-content: center;
+    background-color: black;
 }
 @media (max-width: 900px) {
     .media1 {
         display: flex;
         flex-direction: column;
-        padding: none;
         margin: none;
+        height: 1500px;
+        padding-top: 200px;
     }
 }
 .media{
     color:black;
+    background-color: white;
+    padding: 20px;
 }
 @media (max-width: 900px) {
     .media {
         width: 100%;
+        background-color: white;
+        padding: 20px;
     }
+}
+
+.slideUpDiv1{
+    padding: 0px;
 }
 
 .our{
     text-align:center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 55px;
 }
 @media (max-width: 900px) {
     .our {
@@ -318,14 +330,18 @@ body{
     }
 }
 .here{
-    padding: 20px;
+    padding: 50px;
     font-family: Arial, Helvetica, sans-serif, monospace;
     text-align: center;
+    font-size: 30px;
+    border-top: solid 5px;
+    border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
 @media (max-width: 900px) {
     .here {
         text-align: left; 
         margin-left: none;  
+        padding-bottom: 0px;
     }
 }
 .struct{
@@ -336,11 +352,25 @@ body{
 .build{
     display: flex; 
     align-items: center;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    border-bottom: solid 2px;
+    border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
+
+}
+@media (max-width: 900px) {
+    .build {
+    color: rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 0px;
+    }
 }
 .par{
     padding: 20px; 
     font-family: Arial, Helvetica, sans-serif, monospace;
     width: 600px;
+    text-align: justify;
+    color: white;
 }
 @media (max-width: 900px) {
     .par {
@@ -431,7 +461,7 @@ body{
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 .imageService{
-    width: 250px;
+    width: 450px;
     border-radius: 20px;
     border-bottom: solid 2px rgb(56, 169, 255);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
