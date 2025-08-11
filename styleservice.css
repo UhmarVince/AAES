@@ -236,13 +236,12 @@ body{
 .secondPart{
     background-color: rgb(255, 255, 255);
     height: 1000px;
-    padding-top: 50px;
 }
 @media (max-width: 1000px) {
     .secondPart {
-        margin-top: 0px;
-        height: 1800px;
+        height: 1200px;
         width: 100%;
+        padding-top: 0px;
     }
 }
 .thirdPart{
@@ -289,12 +288,15 @@ body{
     display: flex;
     justify-content: center;
     background-color: black;
+    border-top: dashed 5px;
+    border-image: linear-gradient(to right, rgb(56, 169, 255), rgb(255, 25, 217)) 1;
 }
 @media (max-width: 900px) {
     .media1 {
         display: flex;
         flex-direction: column;
-        height: 1800px;
+        height: 1200px;
+        justify-content: left;
     }
 }
 .media{
@@ -338,6 +340,7 @@ body{
         text-align: justify; 
         margin-left: 0px;  
         padding-bottom: 0px;
+        margin-right: 20px;
     }
 }
 .struct{
@@ -617,7 +620,7 @@ body{
 }
 @media (max-width: 900px) {
     .imageColumn {
-        visibility: hidden;
+        display: none;
     }
 }
 
