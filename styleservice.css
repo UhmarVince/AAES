@@ -235,16 +235,14 @@ body{
 }
 .secondPart{
     background-color: rgb(255, 255, 255);
-    height: 1100px;
+    height: 1000px;
     padding-top: 50px;
-    padding-left: 50px;
 }
 @media (max-width: 1000px) {
     .secondPart {
         margin-top: 0px;
-        height: 1200px;
+        height: 1800px;
         width: 100%;
-        padding-left: 5px;
     }
 }
 .thirdPart{
@@ -296,9 +294,7 @@ body{
     .media1 {
         display: flex;
         flex-direction: column;
-        margin: none;
-        height: 1500px;
-        padding-top: 200px;
+        height: 1800px;
     }
 }
 .media{
@@ -339,8 +335,8 @@ body{
 }
 @media (max-width: 900px) {
     .here {
-        text-align: left; 
-        margin-left: none;  
+        text-align: justify; 
+        margin-left: 0px;  
         padding-bottom: 0px;
     }
 }
@@ -470,7 +466,7 @@ body{
 }
 @media (max-width: 900px) {
     .imageService {
-        visibility: hidden
+        visibility:hidden;
     }
 }
 .imageService:hover {
@@ -596,7 +592,7 @@ body{
 }
 @media (max-width: 900px) {
     .sixthPart {
-        height: 130px;
+        height: 100px;
         margin-bottom: 0;
         padding-bottom: 0;
     }
@@ -610,6 +606,22 @@ body{
         width: 50px;
     }
 }
+
+
+
+.imageColumn{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+@media (max-width: 900px) {
+    .imageColumn {
+        visibility: hidden;
+    }
+}
+
+
 .six{
     display: flex;
     align-items: center;
