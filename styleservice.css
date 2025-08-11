@@ -60,9 +60,9 @@ body{
 .About {
     cursor: pointer;
     padding: 10px;
-    background-color: #f1f1f1;
-    color: #000;
-    border: 1px solid #ccc;
+    background-color:#333;
+    color: #ffffff;
+    border: 1px solid #333;
     display: inline-block;
 }
 
