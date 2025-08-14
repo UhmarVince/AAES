@@ -200,13 +200,13 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height: 500px;
+    height: 1100px;
     justify-content: center;
     align-items: center;
 }
 @media (max-width: 900px) {
     .moreprojects {
-        height: 1500px;
+        height: 3000px;
     }
 }
 
