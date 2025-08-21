@@ -217,6 +217,7 @@ body{
 @media (max-width: 900px) {
     .reviews {
     height: 800px;
+    display: none;
     }
 }
 
