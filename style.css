@@ -210,6 +210,75 @@ body{
     }
 }
 
+.reviews{
+    background-color: white;
+    height: 500px;
+}
+@media (max-width: 900px) {
+    .reviews {
+    height: 800px;
+    }
+}
+
+
+.holder{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 70px;
+}
+.rebyu{
+    border: 5px solid white;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    color: rgb(255, 0, 212);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+@media (max-width: 900px) {
+    .rebyu {
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    }
+}
+.smolText{
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgb(1, 16, 82);
+    text-align: center;
+}
+@media (max-width: 900px) {
+    .smolText {
+    font-size: 20px;
+    font-weight: lighter;
+    color: rgb(1, 16, 82);
+    text-align: center;
+    }
+}
+
+    .parallax {
+      /* The image used */
+      background-image: url('banner.jpg');
+
+      /* Full height */
+      height: 100vh;
+
+      /* Create the parallax scrolling effect */
+      background-attachment: fixed;  /* THIS makes it stay fixed */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+
 
 
 .projimage{
