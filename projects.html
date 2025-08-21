@@ -17,26 +17,33 @@
         <script src="https://vercel.com/analytics/script.js" defer></script>
         
         <link rel="stylesheet" href="styleproject.css">
+        <link rel="stylesheet" href="animation.css">
         <link rel="icon" type="image/x-icon" href="logo.png">
         <title>
             Aceron Aquino Engineering Services
         </title>
 
+
         <script type="application/ld+json">
             {
               "@context": "https://schema.org",
-              "@type": "CollectionPage",
-              "name": "Our Projects",
-              "description": "Explore our completed structural engineering projects.",
-              "url": "https://aa-engineers.net/projects",
-              "hasPart": [
-                {
-                  "@type": "Project",
-                  "name": "Residential House",
-                  "description": "Structural design and analysis for a residential house.",
-                  "url": "https://aa-engineers.net/projects.html"
-                }
-              ]
+              "@type": "Service",
+              "name": "Structural Engineering Services",
+              "provider": {
+                "@type": "Organization",
+                "name": "AA Engineers",
+                "url": "https://aa-engineers.net"
+              },
+              "serviceType": "Structural Analysis & Design, Retrofitting, Seismic Evaluation",
+              "areaServed": {
+                "@type": "Country",
+                "name": "Philippines"
+              },
+              "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": "https://aa-engineers.net/services.html",
+                "availableLanguage": ["English", "Tagalog"]
+              }
             }
             </script>
             
@@ -44,10 +51,9 @@
 
 
 
+
     </head>
     <body>
-
-
                 <div class="header">
   <div class="logo">
     <img src="logo.png" id="logo">
@@ -77,58 +83,70 @@
                 </div>
 
 
-
-
-
-        <div class="secondPart" id="secondPart">
-            <div class="media">
-                <h1 class="our">Projects</h1>
-
-
-
-                <div class="gallery">
-
-                        <div><img src="TALISAY RESIDENCE.jpg" id="talisay"></div>
-                        <div><img src="cruzpost.jpg" id="cruz"></div>
-                        <div><img src="arora23.jpg" id="cruz"></div>
-        
-                    </div>
-
                 
-                        
-                      
+            <div class="media">
+              Projects<br>
 
-
+                <p class="here">
+                        Here are some of the completed projects by <b>Aceron Aquino Engineering Services</b>.
+                </p>
             </div>
 
+        <div class="secondPart">
+                    <div class="galey">
+                        <img src="TALISAY RESIDENCE.jpg" id="talisay">
+                    </div>
+                    <div class="galey">
+                        <img src="cruzpost.jpg" id="cruz">
+                    </div>
+                    <div class="galey">
+                        <img src="arora23.jpg" id="arora23">
+                    </div>
         </div>
+
+<!-------------------------
         <div style="width:100%;display: block;margin: 0;padding: 0;">
             <img src="skyline.jpg" style="width:100%;display: block;margin: 0;padding: 0;">
         </div>
         
-<!------------------------------------------------------------------------------->
+------------------------------------------------------>
 
         <div class="sixthPart" id="sixthPart">
 
             <div class="six">
                 <div><img src="logo.png" id="logoFoot"></div>
+
                 <div><p class="aaes">AAES
                 <br> ACERON AQUINO ENGINEERING SERVICES
                 <br>aaes@aa-engineers.net
                 <br>+639564571185
                 </p></div>
+
                 <div class="link">
                     <a href="https://www.facebook.com/profile.php?id=61567921534758" target="_blank"><img src="fb-removebg-preview.png" id="fb"></a>
                     <a href="https://www.linkedin.com/company/aceron-aquino-engineering-services/" target="_blank"><img src="linkedin-removebg-preview.png" id="link"></a>
                     <a href="https://www.instagram.com/aa_engrs/" target="_blank"><img src="ig-removebg-preview.png" id="ig"></a>
                 </div>
+
             </div>
+
         </div>
         
         <footer style="color: white; font-family: 'Courier New', Courier, monospace;font-size: 8px; padding-left: 10px;margin-bottom: 0;padding-bottom: 0;">
             <p>&copy; 2025 Aceron Aquino Engineering Services. All rights reserved.</p>
         </footer>
 
+
+
+
+          <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', function () {
+      navMenu.classList.toggle('show');
+    });
+  </script>
 
 
         <script type="module" src="react-analytics.js"></script>
