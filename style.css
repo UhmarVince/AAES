@@ -268,7 +268,7 @@ body{
 
     .parallax {
       /* The image used */
-      background-image: url('banner.jpg');
+      background-image: url('banner2.jpg');
 
       /* Full height */
       height: 100vh;
@@ -350,7 +350,7 @@ body{
 
     .parallax2 {
       /* The image used */
-      background-image: url('banner.jpg');
+      background-image: url('banner2.jpg');
     }
 
 
@@ -396,8 +396,10 @@ body{
 
 .projimage{
     width: 300px;
-    border: #000000;
-    border-radius: 10px;
+    border-radius: 20px;
+    border-bottom: solid 2px rgb(56, 169, 255);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
 .projtext{
