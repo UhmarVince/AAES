@@ -676,7 +676,8 @@ body{
     .imageService {
     visibility: visible;
     margin-right: 100px;
-    margin-left: 70px;
+    margin-left: 30px;
+    width: 80%;
     }
 }
 .imageService:hover {
@@ -707,7 +708,7 @@ body{
     color:black;
     background-color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
     padding: 5px;
@@ -729,11 +730,11 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    padding: 5px;
+    padding: 20px;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 55px; 
-    text-align: center;"> 
+    text-align: left;
 }
 @media (max-width: 900px) {
     .media1234 {
@@ -741,6 +742,6 @@ body{
     background-color: white;
     flex-direction: column;
     gap: 5px;
-    padding: 0px;
+    padding-bottom: 10px;
     }
 }
