@@ -246,6 +246,7 @@ body{
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    font-style: italic;
 }
 @media (max-width: 1000px) {
     .secondPart {
