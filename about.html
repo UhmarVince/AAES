@@ -49,7 +49,7 @@
 
     </head>
     <body>
-        <div class="header">
+      <!-------  <div class="header">
             <div class="logo">
             <img src="logo.png" id="logo">
             </div> 
@@ -72,8 +72,34 @@
             <div class="head5" id="head5">
                 Contact Us
             </div>
-        </div>
+        </div>-->
+         <div class="header">
+  <div class="logo">
+    <img src="logo.png" id="logo">
+    <div class="head1">
+      <a href="https://aa-engineers.net" style="text-decoration: none;color: white;">AAES</a>
+    </div>
+  </div>
 
+  <!-- Hamburger Button -->
+  <div class="hamburgerxx" id="hamburger">
+    &#9776; <!-- Unicode hamburger icon -->
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="nav-menuxx" id="nav-menu">
+    <div class="head2" id="head2">Services</div>
+    <div class="head3" id="head3">Projects</div>
+    <div class="head4">
+      <div class="About">About</div>
+      <div class="dropdown-content">
+        <a href="https://aa-engineers.net/about.html">Our Team</a>
+        <a href="https://aa-engineers.net/certificates.html">Certifications and Affiliations</a>
+      </div>
+    </div>
+    <div class="head5" id="head5">Contact Us</div>
+  </nav>
+                </div>
 
     <div class="placeHolder1">
         Our Team<br><br>
@@ -153,7 +179,14 @@
         </footer>
 
 
+          <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
 
+    hamburger.addEventListener('click', function () {
+      navMenu.classList.toggle('show');
+    });
+  </script>
         <script type="module" src="react-analytics.js"></script>
         <script src="animation.js">
         </script>
