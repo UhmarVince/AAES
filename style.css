@@ -492,6 +492,17 @@ body{
 }
 
 
+.spacer1 {
+    background-color: white;
+    height: 100px;
+}
+@media (max-width: 900px) {
+    .spacer1 {
+        font-size: 15px;
+        height: 100px;
+    }
+}
+
 
 .overlay-content {
     margin-left: 350px; /* Centers horizontally */
