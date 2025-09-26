@@ -1402,3 +1402,19 @@ a {
 .fadeInLeft {
 	animation-name: fadeInLeft;
 }
+
+
+.report-embed {
+  border: 0;
+  max-width: 100%;
+  width: 900px;
+  height: 675px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .report-embed {
+    width: 100%;
+    height: 200px; /* Adjust height for mobile */
+  }
+}
