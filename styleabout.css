@@ -675,8 +675,8 @@ body{
 .parent{
     display: flex;
     flex-direction: row;
-    height: 1000px;
-    gap: 20px;
+    height: 500px;
+    gap: 30px;
     justify-content: center;
     padding: 30px;
     flex-wrap: wrap;
@@ -685,7 +685,7 @@ body{
 }
 @media (max-width: 900px) {
     .parent {
-    height: 2000px;
+    height: 1000px;
     }
 }
 .description{
