@@ -55,7 +55,15 @@ body{
     position: relative;
     display: inline-block;
 }
-
+.head6{
+    padding-right: 10px;
+    cursor: pointer;
+}
+@media (max-width: 900px) {
+    #head6 {
+        font-size: 10px;
+    }
+}
 .About {
     cursor: pointer;
     padding: 10px;

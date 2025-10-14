@@ -126,7 +126,16 @@ body{
         font-size: 10px;
     }
 }
+@media (max-width: 900px) {
+    #head6 {
+        font-size: 10px;
+    }
+}
 .head5{
+    padding-right: 10px;
+    cursor: pointer;
+}
+.head6{
     padding-right: 10px;
     cursor: pointer;
 }

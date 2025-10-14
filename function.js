@@ -25,6 +25,14 @@ function rollingThunder3() {
   window.location.href = "https://aa-engineers.net/contact.html";
 }
 
+let rollDown6 = document.getElementById('head6');
+
+rollDown6.addEventListener('click', rollingThunder6);
+
+function rollingThunder6() {
+  window.location.href = "https://aa-engineers.net/careers.html";
+}
+
 let rollDown4 = document.getElementById('herobutton');
 
 rollDown4.addEventListener('click', rollingThunder4);
@@ -32,6 +40,7 @@ rollDown4.addEventListener('click', rollingThunder4);
 function rollingThunder4() {
   window.location.href = "https://aa-engineers.net/about.html";
 }
+
 
 
 
