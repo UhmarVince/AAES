@@ -1167,6 +1167,7 @@ a {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
+    font-style: italic;
 }
 
 
@@ -1176,12 +1177,12 @@ a {
 
 .fifthPart{
     background-color: rgb(255, 255, 255);
-    height: 400px;
+    height: 600px;
     padding-top: 50px;
 }
 @media (max-width: 900px) {
     .fifthPart {
-        height: 700px;
+        height: 800px;
         padding-left: 20px;
     }
 }
