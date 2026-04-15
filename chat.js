@@ -102,20 +102,27 @@ class AAESChatbot {
         try {
             const response = await fetch(AAES_CONFIG.backendUrl, {
                 method: 'POST',
+<<<<<<< HEAD
                 mode: 'cors', // Explicitly enable CORS mode
                 headers: { 
                     'Content-Type': 'application/json'
                 },
+=======
+                headers: { 'Content-Type': 'application/json' },
+>>>>>>> 820c9e5e4bbb7171360f786e5a41246dd1eeedcc
                 body: JSON.stringify({
                     message: message,
                     session_id: this.sessionId
                 })
             });
 
+<<<<<<< HEAD
             if (!response.ok) {
                 throw new Error(`Server responded with ${response.status}`);
             }
 
+=======
+>>>>>>> 820c9e5e4bbb7171360f786e5a41246dd1eeedcc
             const data = await response.json();
             this.showTyping(false);
             
@@ -125,7 +132,11 @@ class AAESChatbot {
                 this.addMessage("I'm having trouble connecting to my engineers. Please try again or email us at admin@aa-engineers.net.", 'bot');
             }
         } catch (error) {
+<<<<<<< HEAD
             console.error('AAES Chat Error DETAILED:', error);
+=======
+            console.error('AAES Chat Error:', error);
+>>>>>>> 820c9e5e4bbb7171360f786e5a41246dd1eeedcc
             this.showTyping(false);
             this.addMessage("Connection error. Our team is aware—please try back in a moment!", 'bot');
         }
