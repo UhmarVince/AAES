@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="animation.css">
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="chat.css">
+    
+    <!-- Real-World Mapping Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <title>
         Aceron Aquino Engineering Services
     </title>
@@ -307,24 +311,16 @@
 
 
 
-    <div style="display: flex;justify-content: center;background-color: white;padding: 20px;">
+    <!-- --- ARCHITECTURAL REAL-WORLD REACH --- -->
+    <section class="reach-map-section">
+        <h2 class="headings" style="text-align: center; margin-bottom: 40px;">Regional Structural Engineering Reach</h2>
+        
+        <div class="map-container-wrapper" style="padding: 0; overflow: hidden; border: 1px solid var(--aaes-glass-border);">
+            <div id="aaes-real-map" style="height: 550px; width: 100%; z-index: 1;"></div>
 
-
-
-        <!--<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQxhv2r1nD
-64hCxwyYfewXyw5EIa64DwuA2wOYptjnQ_jfy6ONWVvoHufjUmLs6RIZQbQn5KIFZPhsw/pubembed?s
-tart=false&loop=false&delayms=15000" frameborder="0" width="960" height="569" 
-allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
-</iframe>-->
-        <br>
-
-        <iframe class="report-embed" width="900" height="675"
-            src="https://lookerstudio.google.com/embed/reporting/d81d5260-42e2-4c36-89ee-fe8a33580e23/page/jxEZF"
-            frameborder="0" allowfullscreen
-            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-        </iframe>
-
-    </div>
+            <!-- Custom Overlay (Glass Tooltip integrated into Leaflet Popups) -->
+        </div>
+    </section>
 
 
 
@@ -766,6 +762,7 @@ allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
     </script>
 
     <!-- AAES Standalone Chat Widget -->
+    <script src="map.js"></script>
     <script src="chat.js"></script>
 </body>
 
