@@ -543,14 +543,14 @@ allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
 
             <form id="contact-form" style="display: grid; gap: 20px; text-align: left;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <input type="text" id="name" placeholder="Name" required
+                    <input type="text" id="name" name="name" placeholder="Name" required
                         style="background: var(--aaes-glass); border: 1px solid var(--aaes-glass-border); padding: 15px; border-radius: 12px; color: white; width: 100%;">
-                    <input type="email" id="email" placeholder="Email" required
+                    <input type="email" id="email" name="email" placeholder="Email" required
                         style="background: var(--aaes-glass); border: 1px solid var(--aaes-glass-border); padding: 15px; border-radius: 12px; color: white; width: 100%;">
                 </div>
-                <input type="text" id="subject" placeholder="Subject" required
+                <input type="text" id="subject" name="subject" placeholder="Subject" required
                     style="background: var(--aaes-glass); border: 1px solid var(--aaes-glass-border); padding: 15px; border-radius: 12px; color: white; width: 100%;">
-                <textarea id="message" placeholder="Your Message" rows="5" required
+                <textarea id="message" name="message" placeholder="Your Message" rows="5" required
                     style="background: var(--aaes-glass); border: 1px solid var(--aaes-glass-border); padding: 15px; border-radius: 12px; color: white; width: 100%; resize: vertical;"></textarea>
 
                 <button type="submit" class="glass-button" style="width: 100%; margin-top: 10px;">
@@ -655,11 +655,12 @@ allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
             formStatus.style.color = 'var(--aaes-blue)';
 
             try {
-                // Pointing to the PythonAnywhere backend we set up previously
-                const response = await fetch('https://UhmarVince.pythonanywhere.com/contact', {
+                // Professional Formspree Endpoint
+                const response = await fetch('https://formspree.io/f/xojyvoaq', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(formData),
                 });
