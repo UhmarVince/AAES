@@ -768,6 +768,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: content-box !important;
 }
 
 .aaes-real-pin {
@@ -778,6 +779,7 @@ ul {
     box-shadow: 0 0 10px var(--aaes-blue);
     border: 2px solid white;
     z-index: 2;
+    box-sizing: content-box !important;
 }
 
 .aaes-real-pin-glow {
@@ -789,6 +791,7 @@ ul {
     opacity: 0.6;
     animation: realPinPulse 2s infinite;
     z-index: 1;
+    box-sizing: content-box !important;
 }
 
 @keyframes realPinPulse {
