@@ -9,7 +9,7 @@ const AAES_LOCATIONS = [
     { name: 'Davao Region', coords: [7.1907, 125.4553], stats: 'Multilevel Steel Structure Design' },
     { name: 'Aurora', coords: [15.7570, 121.5654], stats: 'Structural Design of Merchandise Store' },
     { name: 'Laguna', coords: [14.2773, 121.4167], stats: 'Industrial Facilities | Strength Testing' },
-    { name: 'Albay', coords: [13.1775, 123.5248], stats: 'Steel Warehouse Design' },
+    { name: 'Albay', coords: [13.1391, 123.7438], stats: 'Steel Warehouse Design' },
     { name: 'Calbayog City, Samar', coords: [12.0676, 124.5942], stats: 'Steel Warehouse Design' }
 ];
 
@@ -34,10 +34,14 @@ class RealReachMap {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }).addTo(this.map);
 
-        // Add Premium Zoom Controls
         L.control.zoom({
             position: 'bottomright'
         }).addTo(this.map);
+
+        // Ensure map layout is accurate after load
+        setTimeout(() => {
+            this.map.invalidateSize();
+        }, 500);
 
         this.renderMarkers();
     }
