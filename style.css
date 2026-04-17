@@ -746,6 +746,8 @@ ul {
     to { transform: translate(50px, 50px); }
 }
 
+/* Ensure sub-pages don't have broken gradients on small text */
+
 /* --- REAL MAP SYSTEM (LEAFLET) --- */
 .reach-map-section {
     padding: var(--spacing-lg) 5%;
@@ -754,6 +756,10 @@ ul {
 
 #aaes-real-map {
     background: #0a0a0a !important; /* Neutral background while tiles load */
+    height: 600px;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid var(--aaes-glass-border);
 }
 
 /* Custom Marker Styling */
@@ -832,9 +838,3 @@ ul {
     color: white !important;
 }
 
-/* Ensure sub-pages don't have broken gradients on small text */
-p, .head1 a, .nav-menuxx a {
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-}
