@@ -1,12 +1,19 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/intelhub",
-      "destination": "https://aaes-intelhub.onrender.com"
+      "destination": "/intelhub/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/intelhub/(.*)",
+      "destination": "https://aaes-intel-hub.onrender.com/$1"
     },
     {
-      "source": "/intelhub/:path*",
-      "destination": "https://aaes-intelhub.onrender.com/:path*"
+      "source": "/intelhub/",
+      "destination": "https://aaes-intel-hub.onrender.com/"
     }
   ]
 }
