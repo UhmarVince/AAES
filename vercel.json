@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/intelhub",
+      "destination": "https://aaes-intel-hub.onrender.com"
+    },
+    {
+      "source": "/intelhub/:path*",
+      "destination": "https://aaes-intel-hub.onrender.com/:path*"
+    }
+  ]
+}
