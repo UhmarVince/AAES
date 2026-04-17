@@ -6,10 +6,10 @@
 const AAES_LOCATIONS = [
     { name: 'Metro Manila', coords: [14.5995, 120.9842], stats: 'Residential Structural Design' },
     { name: 'Cebu City', coords: [10.3157, 123.8854], stats: 'Infrastructure Projects | Industrial Design' },
-    { name: 'Davao Region', coords: [7.1907, 125.4553], stats: 'Multilevel Steel Structure Design' },
+    { name: 'Davao City', coords: [7.0707, 125.6087], stats: 'Multilevel Steel Structure Design' },
     { name: 'Aurora', coords: [15.7570, 121.5654], stats: 'Structural Design of Merchandise Store' },
     { name: 'Laguna', coords: [14.2773, 121.4167], stats: 'Industrial Facilities | Strength Testing' },
-    { name: 'Albay', coords: [13.1391, 123.7438], stats: 'Steel Warehouse Design' },
+    { name: 'Legazpi (Albay)', coords: [13.1333, 123.7333], stats: 'Steel Warehouse Design' },
     { name: 'Calbayog City, Samar', coords: [12.0676, 124.5942], stats: 'Steel Warehouse Design' }
 ];
 
