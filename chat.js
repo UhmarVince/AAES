@@ -97,12 +97,23 @@ class AAESChatbot {
 
         input.value = '';
         this.addMessage(message, 'user');
+
+        // 1. Determine if this is the first message to show the FAST AI Greeting
+        const history = JSON.parse(sessionStorage.getItem('aaes_chat_history') || '[]');
+        const userMessages = history.filter(h => h.side === 'user');
+        
+        if (userMessages.length === 1) {
+            // Instant AI Handoff
+            this.addMessage("Hello! I am the AAES AI Assistant. One moment while I notify our structural engineering team. I’ll have an engineer review your inquiry immediately.", 'bot');
+        }
+
+        // 2. Show Typing and Wait (The backend handles the 45s expert delay)
         this.showTyping(true);
 
         try {
             const response = await fetch(AAES_CONFIG.backendUrl, {
                 method: 'POST',
-                mode: 'cors', // Explicitly enable CORS mode
+                mode: 'cors',
                 headers: { 
                     'Content-Type': 'application/json'
                 },
@@ -119,15 +130,19 @@ class AAESChatbot {
             const data = await response.json();
             this.showTyping(false);
             
+            // Handle single or multi-part responses
             if (data.response) {
                 this.addMessage(data.response, 'bot');
+            } else if (data.responses && data.responses.length > 0) {
+                // Compatibility fallback
+                this.addMessage(data.responses[data.responses.length - 1], 'bot');
             } else {
-                this.addMessage("I'm having trouble connecting to my engineers. Please try again or email us at admin@aa-engineers.net.", 'bot');
+                this.addMessage("Pasensya na po, checking po kami sa engineers. Please try again in a bit.", 'bot');
             }
         } catch (error) {
-            console.error('AAES Chat Error DETAILED:', error);
+            console.error('AAES Chat Error:', error);
             this.showTyping(false);
-            this.addMessage("Connection error. Our team is aware—please try back in a moment!", 'bot');
+            this.addMessage("Connection error po. Our team is aware—please try back in a moment!", 'bot');
         }
     }
 
