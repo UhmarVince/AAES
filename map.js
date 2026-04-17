@@ -51,8 +51,8 @@ class RealReachMap {
                     <div class="aaes-real-pin-glow"></div>
                     <div class="aaes-real-pin"></div>
                 `,
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
+                iconSize: [10, 10],
+                iconAnchor: [5, 5]
             });
 
             const marker = L.marker(loc.coords, { icon: icon }).addTo(this.map);
