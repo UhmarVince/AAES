@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/intelhub",
-      "destination": "https://aaes-intel-hub.onrender.com"
+      "destination": "https://aaes-intelhub.onrender.com"
     },
     {
       "source": "/intelhub/:path*",
-      "destination": "https://aaes-intel-hub.onrender.com/:path*"
+      "destination": "https://aaes-intelhub.onrender.com/:path*"
     }
   ]
 }
