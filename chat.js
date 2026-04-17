@@ -162,18 +162,26 @@ class AAESChatbot {
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    window.aaesChat = new AAESChatbot();
+function initAAESChat() {
+    if (!window.aaesChat) {
+        window.aaesChat = new AAESChatbot();
+        
+        // Global listener for AI Consultation triggers (AI Engineering Gateway)
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-trigger="ai-consult"]');
+            if (trigger && window.aaesChat) {
+                const topic = trigger.getAttribute('data-topic');
+                window.aaesChat.openWithTopic(topic);
+            }
+        });
+    }
+}
 
-    // Global listener for AI Consultation triggers (AI Engineering Gateway)
-    document.addEventListener('click', (e) => {
-        const trigger = e.target.closest('[data-trigger="ai-consult"]');
-        if (trigger && window.aaesChat) {
-            const topic = trigger.getAttribute('data-topic');
-            window.aaesChat.openWithTopic(topic);
-        }
-    });
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAAESChat);
+} else {
+    initAAESChat();
+}
 
 /**
  * Extension of AAESChatbot for contextual triggers
