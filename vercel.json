@@ -9,11 +9,11 @@
   "rewrites": [
     {
       "source": "/intelhub/(.*)",
-      "destination": "https://aaes-intel-hub.onrender.com/$1"
+      "destination": "https://aaes-intelhub.onrender.com/$1"
     },
     {
       "source": "/intelhub/",
-      "destination": "https://aaes-intel-hub.onrender.com/"
+      "destination": "https://aaes-intelhub.onrender.com/"
     }
   ]
 }
