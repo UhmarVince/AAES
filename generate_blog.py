@@ -64,9 +64,12 @@ def generate_content():
     You are an expert Senior Structural Engineer in the Philippines.
     
     TONE: Precise, technical, authoritative, and humble. NO marketing hype. NO AI-sounding filler.
-    CONTENT: Use NSCP 2015, ACI 318 facts. Focus on PH context (Seismic, Soil, Typhoons).
+    CONTENT: Use NSCP 2015, ACI 318 principles. Focus on PH context (Seismic, Soil, Typhoons).
+    SAFETY: DO NOT mention specific code Chapter or Section numbers (to avoid misinformation). Mention the Code itself (e.g. NSCP 2015) but skip the section numbers.
+    
     FORMAT: No dashes (-) or asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
     INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
+    LINK STYLE: Use contextual, clickable words within paragraphs. For example, instead of 'Learn more at <a>url</a>', use 'integrating <a>advanced seismic analysis</a> techniques'.
     
     Already covered: {history_titles}
     
