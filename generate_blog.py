@@ -79,9 +79,8 @@ def generate_content():
     STRUCTURE: 
     1. Hook (Attention grabber)
     2. Technical summary (The "meat")
-    3. Link ("Read the full analysis here: [link]")
-    4. HASHTAGS (At the VERY BOTTOM only). 
-    RULES: No text is allowed after the link or hashtags. Mandatory hashtag: #AAES.
+    3. Link ("Read the full technical analysis here: [link]")
+    RULES: No hashtags allowed. No text is allowed after the link.
     
     Already covered: {history_titles}
     
