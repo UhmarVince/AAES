@@ -2,6 +2,7 @@ import os
 import json
 import datetime
 import re
+import requests
 from google import genai
 from pydantic import BaseModel
 from typing import List
@@ -15,10 +16,14 @@ class BlogData(BaseModel):
     meta_description: str
     excerpt: str
     content_html: str
+    linkedin_teaser: str
 
 # --- CONFIGURATION ---
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
+LINKEDIN_WEBHOOK_URL = os.getenv("LINKEDIN_WEBHOOK_URL") 
+WEBSITE_URL = "https://aa-engineers.net" # Update as needed
+
 if not API_KEY:
     print("CRITICAL ERROR: GEMINI_API_KEY not found in environment variables.")
     # In CI, we want to fail fast
@@ -87,6 +92,30 @@ def generate_content():
     
     return response.parsed
 
+def post_to_linkedin(data, article_url):
+    if not LINKEDIN_WEBHOOK_URL:
+        print("LinkedIn Webhook URL not set. Skipping social share.")
+        return
+
+    print("Triggering LinkedIn share via Webhook...")
+    
+    # We send a simple JSON to the webhook
+    payload = {
+        "title": data.title,
+        "teaser": data.linkedin_teaser,
+        "url": article_url,
+        "meta_description": data.meta_description
+    }
+    
+    try:
+        response = requests.post(LINKEDIN_WEBHOOK_URL, json=payload)
+        if response.status_code in [200, 201, 202, 204]:
+            print("Successfully triggered LinkedIn automation!")
+        else:
+            print(f"Webhook Trigger Failed: {response.status_code} - {response.text}")
+    except Exception as e:
+        print(f"Webhook Error: {e}")
+
 def create_article_page(data):
     with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
         template = f.read()
@@ -154,6 +183,10 @@ def main():
         
         if update_gallery(data, filename):
             print("Gallery page updated successfully.")
+        
+        # Share on LinkedIn
+        article_url = f"{WEBSITE_URL}/{filename}"
+        post_to_linkedin(data, article_url)
         
         # Update history
         history = get_history()
