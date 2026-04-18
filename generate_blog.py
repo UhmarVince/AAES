@@ -46,12 +46,12 @@ def generate_content():
     VOICE: Strictly neutral, technical, and objective. Avoid all flowery language, marketing hype, or mentions of personality/humility.
     STRUCTURE: Write 1500+ words. Use at least 4 descriptive H2/H3 headers. 
     FORMATTING: Use ONLY HTML (<h2>, <h3>, <ul>, <li>, <strong>). 
-    RESTRICTION: NEVER use dashes (-) or asterisks (*) for bullet points. Use <ul> and <li>.
+    RESTRICTION: NEVER use dashes (-) or asterisks (*) for bullet points and any content. Use <ul> and <li> for lists.
     SAFETY: Reference 'NSCP 2015' or relevant codes, but NEVER cite specific Chapter, Section, or Table numbers.
     GENERICISM: Focus on engineering principles (seismic, wind, soil). Avoid unnecessary mentions of country or nationality names unless technically essential.
     
-    SOCIAL TASK (linkedin_teaser_body): Write 2 professional technical paragraphs for a peer-level audience. 
-    RULES: No hashtags. No links. No titles. No bragging or humble-bragging. Pure technical insight only.
+    SOCIAL TASK (linkedin_teaser_body): Write 1 professional technical paragraphs for a peer-level audience. 
+    RULES: No hashtags. No links. No titles. NEVER use dashes (-) or asterisks (*) for bullet points and any content. No bragging or humble-bragging. Pure technical insight only.
     
     Already covered topics: {history_titles}
     """
