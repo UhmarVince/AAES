@@ -8,6 +8,11 @@ from dotenv import load_dotenv
 # --- CONFIGURATION ---
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
+if not API_KEY:
+    print("CRITICAL ERROR: GEMINI_API_KEY not found in environment variables.")
+    # In CI, we want to fail fast
+    exit(1)
+
 HISTORY_FILE = "blog_history.json"
 TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
@@ -188,6 +193,8 @@ def main():
         
     except Exception as e:
         print(f"Error during generation: {e}")
+        # Explicitly re-raise to fail the CI/CD job
+        raise e
 
 if __name__ == "__main__":
     main()
