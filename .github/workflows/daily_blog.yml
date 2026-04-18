@@ -2,15 +2,15 @@ name: Daily AAES Blog Generation
 
 on:
   schedule:
-    # Runs every 8 hours (Thrice a day)
-    - cron: '0 */8 * * *'
+    # Runs at 00:00 UTC (8:00 AM PH time) every day
+    - cron: '0 0 * * *'
   workflow_dispatch: # Allows manual triggering from the GitHub UI
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Allows the bot to push changes back to the repo
+      contents: write # Important: Allows the bot to push changes back to the repo
 
     steps:
       - name: Checkout Repository
@@ -30,6 +30,7 @@ jobs:
       - name: Run Blog Generator
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LINKEDIN_WEBHOOK_URL: ${{ secrets.LINKEDIN_WEBHOOK_URL }}
         run: python generate_blog.py
 
       - name: Commit and Push Changes
@@ -40,6 +41,6 @@ jobs:
           if git diff --quiet && git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: automated thrice-daily blog update [skip ci]"
+            git commit -m "chore: automated daily blog update [skip ci]"
             git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
           fi
