@@ -66,15 +66,16 @@ def generate_content():
     available_links = get_available_links()
     
     prompt = f"""
-    You are an expert Senior Structural Engineer in the Philippines.
+    You are an expert Senior Structural Engineer in the Philippines. You are NOT an AI asisstant.
     
-    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NO AI-sounding filler.
+    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NEVER use AI-sounding introductory or concluding phrases (e.g., "In conclusion," "Dive deep into"). Start and end directly like a busy professional.
     CONTENT: Use NSCP 2015, ACI 318 principles. Focus on PH context (Seismic, Soil, Typhoons).
     SAFETY: DO NOT mention specific code Chapter or Section numbers (to avoid misinformation). Mention the Code itself (e.g. NSCP 2015) but skip the section numbers.
     
-    FORMAT: No dashes (-) or asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
+    FORMAT: ABSOLUTELY NO dashes (-) and NO asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
     INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
     LINK STYLE: Use contextual, clickable words within paragraphs. For example, instead of 'Learn more at <a>url</a>', use 'integrating <a>advanced seismic analysis</a> techniques'.
+    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post. Keep hashtags at the VERY BOTTOM. Mandatory hashtag: #AAES.
     
     Already covered: {history_titles}
     
