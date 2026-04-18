@@ -26,7 +26,6 @@ TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
 WEBSITE_URL = "https://aa-engineers.net"
 
-# Initialize Client
 client = genai.Client(api_key=API_KEY)
 MODEL_NAME = 'gemini-2.5-flash' 
 
@@ -42,12 +41,19 @@ def generate_content():
     history_titles = [post['title'] for post in history]
     
     prompt = f"""
-    You are a humble Philippine Structural Engineer. Use contextual links: index.html, services.html.
-    TONE: Quietly technical, humble, and direct. NO titles (Senior/Expert).
-    FORMAT: HTML only. NO dashes (-) or asterisks (*). 
+    You are a humble Philippine Structural Engineer. Write as a 1500+ word technical report.
+    
+    TONE: Deeply technical, authoritative yet humble. NO AI filler like "In conclusion".
+    FORMAT: Use ONLY HTML tags (<h2>, <h3>, <ul>, <li>, <strong>). 
+    CRITICAL: ABSOLUTELY NO dashes (-) or asterisks (*) for lists. You MUST use <ul> and <li> for all lists.
+    STRUCTURE: Use at least 4 descriptive H2 or H3 headers. Include detailed technical specifications and Philippine Code (NSCP 2015) references.
+    
     SOCIAL TASK (linkedin_teaser_body): Write 2 short, humble technical paragraphs. 
-    RULES: NO hashtags. NO links. NO titles. Just body text.
+    RULES: NO hashtags. NO links. NO titles. Just the body message.
+    
     Already covered: {history_titles}
+    
+    TASK: Write a comprehensive structural analysis on a new topic relevant to the Philippines. 
     """
 
     for attempt in range(5):
@@ -61,15 +67,15 @@ def generate_content():
             time.sleep(10)
         except Exception as e:
             if ("503" in str(e).lower() or "429" in str(e).lower()) and attempt < 4:
-                print(f"API Busy. Retrying... ({attempt+1}/5)")
+                print(f"Busy. Retrying... ({attempt+1}/5)")
                 time.sleep(15); continue
             raise e
-    raise Exception("Failed to generate content after all retries.")
+    raise Exception("Failed to generate content.")
 
 def update_gallery(data, filename):
     if not os.path.exists(GALLERY_FILE): return False
     with open(GALLERY_FILE, 'r', encoding='utf-8') as f: gallery_html = f.read()
-    date_str = datetime.datetime.now().strftime("%B %d, %Y")
+    date_str = datetime.datetime.today().strftime("%B %d, %Y")
     new_card = f"""
             <!-- Auto-Generated Card -->
             <article class="blog-card" onclick="location.href='{filename}'">
@@ -78,7 +84,7 @@ def update_gallery(data, filename):
                     <span class="category-tag">{data.category}</span>
                     <h2 class="card-title">{data.title}</h2>
                     <p class="card-excerpt">{data.excerpt}</p>
-                    <div class="card-footer"><span>{date_str}</span><span>10 min read</span></div>
+                    <div class="card-footer"><span>{date_str}</span><span>15 min read</span></div>
                 </div>
             </article>
     """
@@ -91,11 +97,8 @@ def update_gallery(data, filename):
     return False
 
 def main():
-    print("--- AAES Automated Blog Engine ---")
     try:
         data = generate_content()
-        print(f"Topic: {data.title}")
-        
         # Create Article
         with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f: template = f.read()
         date_str = datetime.datetime.today().strftime("%B %d, %Y")
@@ -109,19 +112,17 @@ def main():
         # Share on LinkedIn
         if LINKEDIN_WEBHOOK_URL:
             article_url = f"{WEBSITE_URL}/{filename}"
-            clean_post = f"{data.linkedin_teaser_body}\n\nRead our article here: {article_url}"
+            clean_post = f"{data.linkedin_teaser_body}\n\nRead the technical analysis here: {article_url}"
             requests.post(LINKEDIN_WEBHOOK_URL, json={ "teaser": clean_post })
         
         # History
         history = get_history()
         history.append({"title": data.title, "slug": data.slug})
-        with open(HISTORY_FILE, 'w', encoding='utf-8') as f: 
-            json.dump(history, f)
-        
-        print("Success! Everything is live.")
+        with open(HISTORY_FILE, 'w', encoding='utf-8') as f: json.dump(history, f)
+        print("Success! Deep article live.")
         
     except Exception as e:
-        print(f"Critical Error: {e}")
+        print(f"Error: {e}")
         raise e
 
 if __name__ == "__main__":
