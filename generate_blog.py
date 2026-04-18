@@ -161,7 +161,7 @@ def main():
         })
         save_history(history)
         
-        print(f"Success! Blog post '{data['title']}' is now live.")
+        print(f"Success! Blog post '{data.title}' is now live.")
         
     except Exception as e:
         print(f"Error during generation: {e}")
