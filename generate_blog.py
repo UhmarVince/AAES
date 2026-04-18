@@ -32,15 +32,21 @@ TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
 WEBSITE_URL = "https://aa-engineers.net"
 
-# Use the new google-genai Client
+# Initialize the GenAI Client
 client = genai.Client(api_key=API_KEY)
-# Using the stable 1.5-flash model
-MODEL_NAME = 'gemini-1.5-flash' 
+# Using the most compatible model name for the new SDK
+MODEL_NAME = 'gemini-2.0-flash' 
 
 def get_history():
     if os.path.exists(HISTORY_FILE):
         with open(HISTORY_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            try:
+                content = f.read()
+                if not content.strip():
+                    return []
+                return json.loads(content)
+            except Exception:
+                return []
     return []
 
 def get_available_links():
@@ -66,7 +72,7 @@ def generate_content():
     prompt = f"""
     You are an expert Senior Structural Engineer in the Philippines. You are NOT an AI assistant.
     
-    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NEVER use AI phrases like "In conclusion" or "Dive deep".
+    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NO AI filler words.
     CONTENT: Use NSCP 2015, ACI 318 principles. Focus on PH context (Seismic, Soil, Typhoons).
     SAFETY: DO NOT mention specific code Chapter or Section numbers. Mention the Code name (e.g. NSCP 2015) only.
     
@@ -83,7 +89,7 @@ def generate_content():
     TASK: Write a new technical 1200+ word structural engineering article for the Philippine market.
     """
     
-    # RETRY LOGIC for 503/server errors
+    # RETRY LOGIC for 503/429/connection errors
     for attempt in range(3):
         try:
             response = client.models.generate_content(
@@ -94,11 +100,15 @@ def generate_content():
                     'response_schema': BlogData,
                 }
             )
+            # Ensure we return the parsed data correctly
+            if not response or not response.parsed:
+                raise Exception("Empty response from AI")
             return response.parsed
         except Exception as e:
-            if ("503" in str(e) or "429" in str(e)) and attempt < 2:
-                print(f"API is busy. Retrying in 15 seconds... ({attempt+1}/3)")
-                time.sleep(15)
+            err_str = str(e).lower()
+            if ("503" in err_str or "unavailable" in err_str or "429" in err_str) and attempt < 2:
+                print(f"API busy or unavailable. Retrying in 20 seconds... ({attempt+1}/3)")
+                time.sleep(20)
                 continue
             raise e
 
@@ -124,6 +134,9 @@ def post_to_linkedin(data, article_url):
         print(f"Webhook Error: {e}")
 
 def create_article_page(data):
+    if not os.path.exists(TEMPLATE_FILE):
+        print(f"ERROR: Template file {TEMPLATE_FILE} missing!")
+        return None
     with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
         template = f.read()
     date_str = datetime.datetime.now().strftime("%B %d, %Y")
@@ -134,6 +147,9 @@ def create_article_page(data):
     return filename
 
 def update_gallery(data, filename):
+    if not os.path.exists(GALLERY_FILE):
+        print(f"ERROR: Gallery file {GALLERY_FILE} missing!")
+        return False
     with open(GALLERY_FILE, 'r', encoding='utf-8') as f:
         gallery_html = f.read()
     date_str = datetime.datetime.now().strftime("%B %d, %Y")
@@ -170,6 +186,8 @@ def main():
         data = generate_content()
         print(f"Topic Selected: {data.title}")
         filename = create_article_page(data)
+        if not filename:
+             return
         print(f"Article page created: {filename}")
         if update_gallery(data, filename):
             print("Gallery page updated successfully.")
