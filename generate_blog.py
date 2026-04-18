@@ -75,7 +75,13 @@ def generate_content():
     FORMAT: ABSOLUTELY NO dashes (-) and NO asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
     INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
     LINK STYLE: Use contextual, clickable words within paragraphs. For example, instead of 'Learn more at <a>url</a>', use 'integrating <a>advanced seismic analysis</a> techniques'.
-    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post. Keep hashtags at the VERY BOTTOM. Mandatory hashtag: #AAES.
+    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post for an engineering audience.
+    STRUCTURE: 
+    1. Hook (Attention grabber)
+    2. Technical summary (The "meat")
+    3. Link ("Read the full analysis here: [link]")
+    4. HASHTAGS (At the VERY BOTTOM only). 
+    RULES: No text is allowed after the link or hashtags. Mandatory hashtag: #AAES.
     
     Already covered: {history_titles}
     
