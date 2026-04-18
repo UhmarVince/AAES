@@ -112,7 +112,7 @@ def main():
         # Share on LinkedIn
         if LINKEDIN_WEBHOOK_URL:
             article_url = f"{WEBSITE_URL}/{filename}"
-            clean_post = f"{data.linkedin_teaser_body}\n\nRead the technical analysis here: {article_url}"
+            clean_post = f"{data.linkedin_teaser_body}\n\nRead our article here: {article_url}"
             requests.post(LINKEDIN_WEBHOOK_URL, json={ "teaser": clean_post })
         
         # History
