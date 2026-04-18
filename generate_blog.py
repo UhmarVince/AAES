@@ -34,8 +34,8 @@ WEBSITE_URL = "https://aa-engineers.net"
 
 # Initialize the GenAI Client
 client = genai.Client(api_key=API_KEY)
-# Using the most compatible model name for the new SDK
-MODEL_NAME = 'gemini-2.0-flash' 
+# Using the current 2.5-flash standard
+MODEL_NAME = 'gemini-2.5-flash' 
 
 def get_history():
     if os.path.exists(HISTORY_FILE):
@@ -72,7 +72,7 @@ def generate_content():
     prompt = f"""
     You are an expert Senior Structural Engineer in the Philippines. You are NOT an AI assistant.
     
-    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NO AI filler words.
+    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NEVER use AI filler phrases.
     CONTENT: Use NSCP 2015, ACI 318 principles. Focus on PH context (Seismic, Soil, Typhoons).
     SAFETY: DO NOT mention specific code Chapter or Section numbers. Mention the Code name (e.g. NSCP 2015) only.
     
@@ -89,8 +89,8 @@ def generate_content():
     TASK: Write a new technical 1200+ word structural engineering article for the Philippine market.
     """
     
-    # RETRY LOGIC for 503/429/connection errors
-    for attempt in range(3):
+    # RETRY LOGIC for 503/server errors
+    for attempt in range(5): # Extra retries for high demand
         try:
             response = client.models.generate_content(
                 model=MODEL_NAME,
@@ -100,15 +100,14 @@ def generate_content():
                     'response_schema': BlogData,
                 }
             )
-            # Ensure we return the parsed data correctly
             if not response or not response.parsed:
-                raise Exception("Empty response from AI")
+                 raise Exception("Empty AI output")
             return response.parsed
         except Exception as e:
             err_str = str(e).lower()
-            if ("503" in err_str or "unavailable" in err_str or "429" in err_str) and attempt < 2:
-                print(f"API busy or unavailable. Retrying in 20 seconds... ({attempt+1}/3)")
-                time.sleep(20)
+            if ("503" in err_str or "unavailable" in err_str or "429" in err_str) and attempt < 4:
+                print(f"API busy. Retrying in 15 seconds... ({attempt+1}/5)")
+                time.sleep(15)
                 continue
             raise e
 
@@ -135,7 +134,6 @@ def post_to_linkedin(data, article_url):
 
 def create_article_page(data):
     if not os.path.exists(TEMPLATE_FILE):
-        print(f"ERROR: Template file {TEMPLATE_FILE} missing!")
         return None
     with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
         template = f.read()
@@ -148,7 +146,6 @@ def create_article_page(data):
 
 def update_gallery(data, filename):
     if not os.path.exists(GALLERY_FILE):
-        print(f"ERROR: Gallery file {GALLERY_FILE} missing!")
         return False
     with open(GALLERY_FILE, 'r', encoding='utf-8') as f:
         gallery_html = f.read()
@@ -187,6 +184,7 @@ def main():
         print(f"Topic Selected: {data.title}")
         filename = create_article_page(data)
         if not filename:
+             print("Critical Error: Template missing.")
              return
         print(f"Article page created: {filename}")
         if update_gallery(data, filename):
