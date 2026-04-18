@@ -3,7 +3,18 @@ import json
 import datetime
 import re
 from google import genai
+from pydantic import BaseModel
+from typing import List
 from dotenv import load_dotenv
+
+# --- DATA MODEL ---
+class BlogData(BaseModel):
+    title: str
+    slug: str
+    category: str
+    meta_description: str
+    excerpt: str
+    content_html: str
 
 # --- CONFIGURATION ---
 load_dotenv()
@@ -50,67 +61,28 @@ def generate_content():
     available_links = get_available_links()
     
     prompt = f"""
-    You are an expert Structural Engineer in the Philippines. You are NOT an AI assistant; you are a senior professional structural engineer writing for a technical audience.
+    You are an expert Senior Structural Engineer in the Philippines.
     
-    TONE AND VOICE:
-    - Sound like an experienced, grounded engineer. 
-    - Be precise, technical, and authoritative.
-    - HUMILITY: Do NOT claim AAES is the "best," "no. 1," or "leader." Avoid marketing hype. Focus solely on expertise and facts.
-    - NO AI-sounding introductory or concluding phrases. Start and end directly.
-    - Use clear, professional English with perfect grammar.
+    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NO AI-sounding filler.
+    CONTENT: Use NSCP 2015, ACI 318 facts. Focus on PH context (Seismic, Soil, Typhoons).
+    FORMAT: No dashes (-) or asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
+    INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
     
-    SEO & LINKING:
-    - TARGET: Rank #1 for structural engineering in the Philippines by providing the most technical and valuable content.
-    - INTERNAL LINKING: You MUST include at least 2 organic internal links to other AAES content. Use the list of available links below.
-    - Format links as <a href="url">Link Text</a>.
+    Already covered: {history_titles}
     
-    AVAILABLE INTERNAL LINKS:
-    {json.dumps(available_links, indent=2)}
-    
-    CONTENT RULES:
-    - NEVER mention third-party brand names.
-    - Use ONLY verified facts from trusted sources (NSCP 2015, ACI 318, etc.).
-    - Focus on the Philippine context (local soil, seismic zones, typhoons).
-    - NO DASHES (-) and NO ASTERISKS (*) in the content for formatting. Use ONLY HTML tags (<h2>, <h3>, <p>, <ul>, <li>, <strong>).
-    
-    TOPIC CONTEXT:
-    Already covered topics: {history_titles}
-    
-    TASK:
-    1. Brainstorm a NEW, unique topic about structural engineering in the Philippines.
-    2. Write a professional, data-driven article (Minimum 1200 words).
-    
-    OUTPUT FORMAT (JSON):
-    {{
-        "title": "Technical, Keyword-Rich Title",
-        "slug": "url-friendly-slug",
-        "category": "Technical Guide / Engineering Analysis",
-        "meta_description": "Under 160 chars",
-        "excerpt": "A professional 1-2 sentence technical summary",
-        "content_html": "The full article body in HTML. Deep technical precision is mandatory."
-    }}
-    
-    Return ONLY the JSON.
+    TASK: Write a new technical 1200+ word structural engineering article for the Philippine market.
     """
     
     response = client.models.generate_content(
         model=MODEL_NAME,
-        contents=prompt
+        contents=prompt,
+        config={
+            'response_mime_type': 'application/json',
+            'response_schema': BlogData,
+        }
     )
     
-    # More robust JSON extraction
-    content = response.text
-    try:
-        start_idx = content.find('{')
-        if start_idx == -1:
-            raise ValueError("No JSON object found in response")
-        
-        # Use raw_decode to get only the first valid JSON object
-        data, index = json.JSONDecoder(strict=False).raw_decode(content[start_idx:])
-        return data
-    except Exception as e:
-        print(f"FAILED TO PARSE JSON. RAW RESPONSE: {content}")
-        raise e
+    return response.parsed
 
 def create_article_page(data):
     with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
@@ -118,12 +90,12 @@ def create_article_page(data):
     
     date_str = datetime.datetime.now().strftime("%B %d, %Y")
     
-    html = template.replace("{{TITLE}}", data['title'])
-    html = html.replace("{{METADESC}}", data['meta_description'])
+    html = template.replace("{{TITLE}}", data.title)
+    html = html.replace("{{METADESC}}", data.meta_description)
     html = html.replace("{{DATE}}", date_str)
-    html = html.replace("{{CONTENT}}", data['content_html'])
+    html = html.replace("{{CONTENT}}", data.content_html)
     
-    filename = f"{data['slug']}.html"
+    filename = f"{data.slug}.html"
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(html)
     return filename
@@ -136,16 +108,16 @@ def update_gallery(data, filename):
     
     # Create the new card HTML
     new_card = f"""
-            <!-- Auto-Generated Card: {data['title']} -->
+            <!-- Auto-Generated Card: {data.title} -->
             <article class="blog-card" onclick="location.href='{filename}'">
                 <div class="card-image">
                     <div class="abstract-pattern"></div>
                     <img src="logo.png" style="width: 60px; opacity: 0.5; filter: grayscale(1);">
                 </div>
                 <div class="card-content">
-                    <span class="category-tag">{data['category']}</span>
-                    <h2 class="card-title">{data['title']}</h2>
-                    <p class="card-excerpt">{data['excerpt']}</p>
+                    <span class="category-tag">{data.category}</span>
+                    <h2 class="card-title">{data.title}</h2>
+                    <p class="card-excerpt">{data.excerpt}</p>
                     <div class="card-footer">
                         <span>{date_str}</span>
                         <span>10 min read</span>
@@ -172,7 +144,7 @@ def main():
     
     try:
         data = generate_content()
-        print(f"Topic Selected: {data['title']}")
+        print(f"Topic Selected: {data.title}")
         
         filename = create_article_page(data)
         print(f"Article page created: {filename}")
@@ -183,8 +155,8 @@ def main():
         # Update history
         history = get_history()
         history.append({
-            "title": data['title'],
-            "slug": data['slug'],
+            "title": data.title,
+            "slug": data.slug,
             "date": datetime.datetime.now().isoformat()
         })
         save_history(history)
