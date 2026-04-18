@@ -17,7 +17,7 @@ class BlogData(BaseModel):
     meta_description: str
     excerpt: str
     content_html: str
-    linkedin_teaser: str
+    linkedin_teaser_body: str # The AI only writes the technical message
 
 # --- CONFIGURATION ---
 load_dotenv()
@@ -32,9 +32,8 @@ TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
 WEBSITE_URL = "https://aa-engineers.net"
 
-# Initialize the GenAI Client
 client = genai.Client(api_key=API_KEY)
-# Using the current 2.5-flash standard
+# Using the stable 2.5-flash for 2026
 MODEL_NAME = 'gemini-2.5-flash' 
 
 def get_history():
@@ -42,11 +41,9 @@ def get_history():
         with open(HISTORY_FILE, 'r', encoding='utf-8') as f:
             try:
                 content = f.read()
-                if not content.strip():
-                    return []
+                if not content.strip(): return []
                 return json.loads(content)
-            except Exception:
-                return []
+            except Exception: return []
     return []
 
 def get_available_links():
@@ -72,25 +69,22 @@ def generate_content():
     prompt = f"""
     You are an expert Senior Structural Engineer in the Philippines. You are NOT an AI assistant.
     
-    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NEVER use AI filler phrases.
-    CONTENT: Use NSCP 2015, ACI 318 principles. Focus on PH context (Seismic, Soil, Typhoons).
-    SAFETY: DO NOT mention specific code Chapter or Section numbers. Mention the Code name (e.g. NSCP 2015) only.
-    
-    FORMAT: ABSOLUTELY NO dashes (-) and NO asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
+    TONE: Precise, technical, authoritative and humble. NEVER use AI filler phrases.
+    FORMAT: Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>). ABSOLUTELY NO dashes (-) or asterisks (*).
+    SAFETY: Mention the Code name (NSCP 2015) only. Never mention specific Section numbers.
     INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
-    LINK STYLE: Use contextual, clickable words within paragraphs.
     
-    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post for an engineering audience. 
-    STRUCTURE: 1. Hook, 2. Technical summary, 3. Link ("Read the full technical analysis here: [link]").
-    RULES: No hashtags allowed. No text allowed after the link.
+    SOCIAL TASK (linkedin_teaser_body): Write a 2-paragraph professional message for LinkedIn.
+    - Paragraph 1: A technical hook about an engineering challenge.
+    - Paragraph 2: Insights into the structural engineering best practices used.
+    - RULES: NO hashtags. NO links. NO filenames or .html in the text. ONLY the message body.
     
     Already covered: {history_titles}
     
     TASK: Write a new technical 1200+ word structural engineering article for the Philippine market.
     """
     
-    # RETRY LOGIC for 503/server errors
-    for attempt in range(5): # Extra retries for high demand
+    for attempt in range(5):
         try:
             response = client.models.generate_content(
                 model=MODEL_NAME,
@@ -100,12 +94,9 @@ def generate_content():
                     'response_schema': BlogData,
                 }
             )
-            if not response or not response.parsed:
-                 raise Exception("Empty AI output")
             return response.parsed
         except Exception as e:
-            err_str = str(e).lower()
-            if ("503" in err_str or "unavailable" in err_str or "429" in err_str) and attempt < 4:
+            if ("503" in str(e) or "429" in str(e)) and attempt < 4:
                 print(f"API busy. Retrying in 15 seconds... ({attempt+1}/5)")
                 time.sleep(15)
                 continue
@@ -116,10 +107,13 @@ def post_to_linkedin(data, article_url):
         print("LinkedIn Webhook URL not set. Skipping social share.")
         return
 
+    # HARD-CODED STRUCTURE: We force the link to be at the very bottom
+    final_post_text = f"{data.linkedin_teaser_body}\n\nRead the full technical analysis here: {article_url}"
+
     print("Triggering LinkedIn share via Webhook...")
     payload = {
         "title": data.title,
-        "teaser": data.linkedin_teaser,
+        "teaser": final_post_text, # This carries our perfect structure
         "url": article_url,
         "meta_description": data.meta_description
     }
@@ -183,10 +177,8 @@ def main():
         data = generate_content()
         print(f"Topic Selected: {data.title}")
         filename = create_article_page(data)
-        if not filename:
-             print("Critical Error: Template missing.")
-             return
-        print(f"Article page created: {filename}")
+        if not filename: return
+        
         if update_gallery(data, filename):
             print("Gallery page updated successfully.")
         
@@ -196,9 +188,9 @@ def main():
         history = get_history()
         history.append({"title": data.title, "slug": data.slug, "date": datetime.datetime.now().isoformat()})
         save_history(history)
-        print(f"Success! Blog post '{data.title}' is now live.")
+        print(f"Success! Blog post live and shared.")
     except Exception as e:
-        print(f"Error during generation: {e}")
+        print(f"Error: {e}")
         raise e
 
 if __name__ == "__main__":
