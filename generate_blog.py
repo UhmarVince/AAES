@@ -3,6 +3,7 @@ import json
 import datetime
 import re
 import requests
+import time
 from google import genai
 from pydantic import BaseModel
 from typing import List
@@ -21,21 +22,19 @@ class BlogData(BaseModel):
 # --- CONFIGURATION ---
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
-LINKEDIN_WEBHOOK_URL = os.getenv("LINKEDIN_WEBHOOK_URL") 
-WEBSITE_URL = "https://aa-engineers.net" # Update as needed
-
 if not API_KEY:
     print("CRITICAL ERROR: GEMINI_API_KEY not found in environment variables.")
-    # In CI, we want to fail fast
     exit(1)
 
+LINKEDIN_WEBHOOK_URL = os.getenv("LINKEDIN_WEBHOOK_URL") 
 HISTORY_FILE = "blog_history.json"
 TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
+WEBSITE_URL = "https://aa-engineers.net"
 
 # Use the new google-genai Client
 client = genai.Client(api_key=API_KEY)
-MODEL_NAME = 'gemini-2.5-flash' # Updated to a newer supported model
+MODEL_NAME = 'gemini-2.0-flash' # Stable and high-demand resilient model
 
 def get_history():
     if os.path.exists(HISTORY_FILE):
@@ -45,13 +44,11 @@ def get_history():
 
 def get_available_links():
     history = get_history()
-    # Core pages
     links = [
         {"title": "Home", "url": "index.html"},
         {"title": "Our Services", "url": "services.html"},
         {"title": "Projects Gallery", "url": "projects.html"}
     ]
-    # Existing articles
     for post in history:
         links.append({"title": post['title'], "url": f"{post['slug']}.html"})
     return links
@@ -66,37 +63,43 @@ def generate_content():
     available_links = get_available_links()
     
     prompt = f"""
-    You are an expert Senior Structural Engineer in the Philippines. You are NOT an AI asisstant.
+    You are an expert Senior Structural Engineer in the Philippines. You are NOT an AI assistant.
     
-    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NEVER use AI-sounding introductory or concluding phrases (e.g., "In conclusion," "Dive deep into"). Start and end directly like a busy professional.
+    TONE: Precise, technical, authoritative, and humble. NO marketing hype. NEVER use AI phrases like "In conclusion" or "Dive deep".
     CONTENT: Use NSCP 2015, ACI 318 principles. Focus on PH context (Seismic, Soil, Typhoons).
-    SAFETY: DO NOT mention specific code Chapter or Section numbers (to avoid misinformation). Mention the Code itself (e.g. NSCP 2015) but skip the section numbers.
+    SAFETY: DO NOT mention specific code Chapter or Section numbers. Mention the Code name (e.g. NSCP 2015) only.
     
     FORMAT: ABSOLUTELY NO dashes (-) and NO asterisks (*) for formatting. Use HTML tags only (<h2>, <h3>, <ul>, <li>, <strong>).
     INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
-    LINK STYLE: Use contextual, clickable words within paragraphs. For example, instead of 'Learn more at <a>url</a>', use 'integrating <a>advanced seismic analysis</a> techniques'.
-    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post for an engineering audience.
-    STRUCTURE: 
-    1. Hook (Attention grabber)
-    2. Technical summary (The "meat")
-    3. Link ("Read the full technical analysis here: [link]")
-    RULES: No hashtags allowed. No text is allowed after the link.
+    LINK STYLE: Use contextual, clickable words within paragraphs.
+    
+    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post. 
+    STRUCTURE: 1. Hook, 2. Technical summary, 3. Link ("Read the full analysis here: [link]").
+    RULES: No hashtags allowed. No text allowed after the link.
     
     Already covered: {history_titles}
     
     TASK: Write a new technical 1200+ word structural engineering article for the Philippine market.
     """
     
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=prompt,
-        config={
-            'response_mime_type': 'application/json',
-            'response_schema': BlogData,
-        }
-    )
-    
-    return response.parsed
+    # RETRY LOGIC for 503 errors
+    for attempt in range(3):
+        try:
+            response = client.models.generate_content(
+                model=MODEL_NAME,
+                contents=prompt,
+                config={
+                    'response_mime_type': 'application/json',
+                    'response_schema': BlogData,
+                }
+            )
+            return response.parsed
+        except Exception as e:
+            if "503" in str(e) and attempt < 2:
+                print(f"Google API is busy. Retrying in 15 seconds... ({attempt+1}/3)")
+                time.sleep(15)
+                continue
+            raise e
 
 def post_to_linkedin(data, article_url):
     if not LINKEDIN_WEBHOOK_URL:
@@ -104,15 +107,12 @@ def post_to_linkedin(data, article_url):
         return
 
     print("Triggering LinkedIn share via Webhook...")
-    
-    # We send a simple JSON to the webhook
     payload = {
         "title": data.title,
         "teaser": data.linkedin_teaser,
         "url": article_url,
         "meta_description": data.meta_description
     }
-    
     try:
         response = requests.post(LINKEDIN_WEBHOOK_URL, json=payload)
         if response.status_code in [200, 201, 202, 204]:
@@ -125,14 +125,8 @@ def post_to_linkedin(data, article_url):
 def create_article_page(data):
     with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
         template = f.read()
-    
     date_str = datetime.datetime.now().strftime("%B %d, %Y")
-    
-    html = template.replace("{{TITLE}}", data.title)
-    html = html.replace("{{METADESC}}", data.meta_description)
-    html = html.replace("{{DATE}}", date_str)
-    html = html.replace("{{CONTENT}}", data.content_html)
-    
+    html = template.replace("{{TITLE}}", data.title).replace("{{METADESC}}", data.meta_description).replace("{{DATE}}", date_str).replace("{{CONTENT}}", data.content_html)
     filename = f"{data.slug}.html"
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(html)
@@ -141,10 +135,7 @@ def create_article_page(data):
 def update_gallery(data, filename):
     with open(GALLERY_FILE, 'r', encoding='utf-8') as f:
         gallery_html = f.read()
-    
     date_str = datetime.datetime.now().strftime("%B %d, %Y")
-    
-    # Create the new card HTML
     new_card = f"""
             <!-- Auto-Generated Card: {data.title} -->
             <article class="blog-card" onclick="location.href='{filename}'">
@@ -163,13 +154,10 @@ def update_gallery(data, filename):
                 </div>
             </article>
     """
-    
-    # Inject after the gallery container start
     marker = '<div class="blog-gallery" id="blog-gallery">'
     if marker in gallery_html:
         parts = gallery_html.split(marker)
         updated_html = parts[0] + marker + new_card + parts[1]
-        
         with open(GALLERY_FILE, 'w', encoding='utf-8') as f:
             f.write(updated_html)
         return True
@@ -177,37 +165,23 @@ def update_gallery(data, filename):
 
 def main():
     print("--- AAES Automated Blog Engine ---")
-    print(f"Using Model: {MODEL_NAME}")
-    print("Generating unique topic and content...")
-    
     try:
         data = generate_content()
         print(f"Topic Selected: {data.title}")
-        
         filename = create_article_page(data)
         print(f"Article page created: {filename}")
-        
         if update_gallery(data, filename):
             print("Gallery page updated successfully.")
         
-        # Share on LinkedIn
         article_url = f"{WEBSITE_URL}/{filename}"
         post_to_linkedin(data, article_url)
         
-        # Update history
         history = get_history()
-        history.append({
-            "title": data.title,
-            "slug": data.slug,
-            "date": datetime.datetime.now().isoformat()
-        })
+        history.append({"title": data.title, "slug": data.slug, "date": datetime.datetime.now().isoformat()})
         save_history(history)
-        
         print(f"Success! Blog post '{data.title}' is now live.")
-        
     except Exception as e:
         print(f"Error during generation: {e}")
-        # Explicitly re-raise to fail the CI/CD job
         raise e
 
 if __name__ == "__main__":
