@@ -28,7 +28,6 @@ WEBSITE_URL = "https://aa-engineers.net"
 
 # Initialize Client
 client = genai.Client(api_key=API_KEY)
-# Using the current 2026 standard model
 MODEL_NAME = 'gemini-2.5-flash' 
 
 def get_history():
@@ -42,40 +41,30 @@ def generate_content():
     history = get_history()
     history_titles = [post['title'] for post in history]
     
-    # DIAGNOSTIC: List models if we hit a 404
-    try:
-        prompt = f"""
-        You are a humble Philippine Structural Engineer. Use contextual links: index.html, services.html.
-        TONE: Quietly technical, humble, and direct. NO titles (Senior/Expert).
-        FORMAT: HTML only. NO dashes (-) or asterisks (*). 
-        SOCIAL TASK (linkedin_teaser_body): Write 2 short, humble technical paragraphs. 
-        RULES: NO hashtags. NO links. NO titles. Just body text.
-        Already covered: {history_titles}
-        """
+    prompt = f"""
+    You are a humble Philippine Structural Engineer. Use contextual links: index.html, services.html.
+    TONE: Quietly technical, humble, and direct. NO titles (Senior/Expert).
+    FORMAT: HTML only. NO dashes (-) or asterisks (*). 
+    SOCIAL TASK (linkedin_teaser_body): Write 2 short, humble technical paragraphs. 
+    RULES: NO hashtags. NO links. NO titles. Just body text.
+    Already covered: {history_titles}
+    """
 
-        # RETRY LOGIC for busy server
-        for attempt in range(5):
-            try:
-                response = client.models.generate_content(
-                    model=MODEL_NAME, contents=prompt,
-                    config={'response_mime_type': 'application/json', 'response_schema': BlogData}
-                )
-                if response and response.parsed:
-                    return response.parsed
-                time.sleep(10)
-            except Exception as e:
-                err_msg = str(e).lower()
-                if "404" in err_msg:
-                    print("Model 404 Detected. Available models for your account:")
-                    for m in client.models.list(): print(f" - {m.name}")
-                    raise e
-                if ("503" in err_msg or "429" in err_msg) and attempt < 4:
-                    print(f"API Busy. Retrying in 15s... ({attempt+1}/5)")
-                    time.sleep(15); continue
-                raise e
-    except Exception as e:
-        print(f"Generation Error: {e}")
-        raise e
+    for attempt in range(5):
+        try:
+            response = client.models.generate_content(
+                model=MODEL_NAME, contents=prompt,
+                config={'response_mime_type': 'application/json', 'response_schema': BlogData}
+            )
+            if response and response.parsed:
+                return response.parsed
+            time.sleep(10)
+        except Exception as e:
+            if ("503" in str(e).lower() or "429" in str(e).lower()) and attempt < 4:
+                print(f"API Busy. Retrying... ({attempt+1}/5)")
+                time.sleep(15); continue
+            raise e
+    raise Exception("Failed to generate content after all retries.")
 
 def update_gallery(data, filename):
     if not os.path.exists(GALLERY_FILE): return False
@@ -109,7 +98,7 @@ def main():
         
         # Create Article
         with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f: template = f.read()
-        date_str = datetime.datetime.now().strftime("%B %d, %Y")
+        date_str = datetime.datetime.today().strftime("%B %d, %Y")
         html = template.replace("{{TITLE}}", data.title).replace("{{METADESC}}", data.meta_description).replace("{{DATE}}", date_str).replace("{{CONTENT}}", data.content_html)
         filename = f"{data.slug}.html"
         with open(filename, 'w', encoding='utf-8') as f: f.write(html)
@@ -122,9 +111,18 @@ def main():
             article_url = f"{WEBSITE_URL}/{filename}"
             clean_post = f"{data.linkedin_teaser_body}\n\nRead the technical analysis here: {article_url}"
             requests.post(LINKEDIN_WEBHOOK_URL, json={ "teaser": clean_post })
-            print("LinkedIn update sent.")
         
         # History
         history = get_history()
         history.append({"title": data.title, "slug": data.slug})
-        with open(HISTORY_FILE, 'w', encoding='utf-8') as f: json.dump(
+        with open(HISTORY_FILE, 'w', encoding='utf-8') as f: 
+            json.dump(history, f)
+        
+        print("Success! Everything is live.")
+        
+    except Exception as e:
+        print(f"Critical Error: {e}")
+        raise e
+
+if __name__ == "__main__":
+    main()
