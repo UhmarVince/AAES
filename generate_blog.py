@@ -34,7 +34,8 @@ WEBSITE_URL = "https://aa-engineers.net"
 
 # Use the new google-genai Client
 client = genai.Client(api_key=API_KEY)
-MODEL_NAME = 'gemini-2.0-flash' # Stable and high-demand resilient model
+# Using the stable 1.5-flash model
+MODEL_NAME = 'gemini-1.5-flash' 
 
 def get_history():
     if os.path.exists(HISTORY_FILE):
@@ -73,8 +74,8 @@ def generate_content():
     INTERNAL LINKING: Include at least 2 links from this list: {json.dumps(available_links)}
     LINK STYLE: Use contextual, clickable words within paragraphs.
     
-    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post. 
-    STRUCTURE: 1. Hook, 2. Technical summary, 3. Link ("Read the full analysis here: [link]").
+    SOCIAL STYLE (linkedin_teaser): Write a professional LinkedIn post for an engineering audience. 
+    STRUCTURE: 1. Hook, 2. Technical summary, 3. Link ("Read the full technical analysis here: [link]").
     RULES: No hashtags allowed. No text allowed after the link.
     
     Already covered: {history_titles}
@@ -82,7 +83,7 @@ def generate_content():
     TASK: Write a new technical 1200+ word structural engineering article for the Philippine market.
     """
     
-    # RETRY LOGIC for 503 errors
+    # RETRY LOGIC for 503/server errors
     for attempt in range(3):
         try:
             response = client.models.generate_content(
@@ -95,8 +96,8 @@ def generate_content():
             )
             return response.parsed
         except Exception as e:
-            if "503" in str(e) and attempt < 2:
-                print(f"Google API is busy. Retrying in 15 seconds... ({attempt+1}/3)")
+            if ("503" in str(e) or "429" in str(e)) and attempt < 2:
+                print(f"API is busy. Retrying in 15 seconds... ({attempt+1}/3)")
                 time.sleep(15)
                 continue
             raise e
