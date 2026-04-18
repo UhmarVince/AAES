@@ -41,19 +41,19 @@ def generate_content():
     history_titles = [post['title'] for post in history]
     
     prompt = f"""
-    You are a humble Philippine Structural Engineer. Write as a 1500+ word technical report.
+    You are a professional Filipino structural engineer writing a technical whitepaper.
     
-    TONE: Deeply technical, authoritative yet humble. NO AI filler like "In conclusion".
-    FORMAT: Use ONLY HTML tags (<h2>, <h3>, <ul>, <li>, <strong>). 
-    CRITICAL: ABSOLUTELY NO dashes (-) or asterisks (*) for lists. You MUST use <ul> and <li> for all lists.
-    STRUCTURE: Use at least 4 descriptive H2 or H3 headers. Include detailed technical specifications and Philippine Code (NSCP 2015) references.
+    VOICE: Strictly neutral, technical, and objective. Avoid all flowery language, marketing hype, or mentions of personality/humility.
+    STRUCTURE: Write 1500+ words. Use at least 4 descriptive H2/H3 headers. 
+    FORMATTING: Use ONLY HTML (<h2>, <h3>, <ul>, <li>, <strong>). 
+    RESTRICTION: NEVER use dashes (-) or asterisks (*) for bullet points. Use <ul> and <li>.
+    SAFETY: Reference 'NSCP 2015' or relevant codes, but NEVER cite specific Chapter, Section, or Table numbers.
+    GENERICISM: Focus on engineering principles (seismic, wind, soil). Avoid unnecessary mentions of country or nationality names unless technically essential.
     
-    SOCIAL TASK (linkedin_teaser_body): Write 2 short, humble technical paragraphs. 
-    RULES: NO hashtags. NO links. NO titles. Just the body message.
+    SOCIAL TASK (linkedin_teaser_body): Write 2 professional technical paragraphs for a peer-level audience. 
+    RULES: No hashtags. No links. No titles. No bragging or humble-bragging. Pure technical insight only.
     
-    Already covered: {history_titles}
-    
-    TASK: Write a comprehensive structural analysis on a new topic relevant to the Philippines. 
+    Already covered topics: {history_titles}
     """
 
     for attempt in range(5):
@@ -119,7 +119,7 @@ def main():
         history = get_history()
         history.append({"title": data.title, "slug": data.slug})
         with open(HISTORY_FILE, 'w', encoding='utf-8') as f: json.dump(history, f)
-        print("Success! Deep article live.")
+        print("Success! Final professional version is live.")
         
     except Exception as e:
         print(f"Error: {e}")
