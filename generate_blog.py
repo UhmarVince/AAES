@@ -22,7 +22,7 @@ class BlogData(BaseModel):
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 LINKEDIN_WEBHOOK_URL = os.getenv("LINKEDIN_WEBHOOK_URL")
-FACEBOOK_WEBHOOK_URL = os.getenv("FACEBOOK_WEBHOOK_URL") # Added this
+FACEBOOK_WEBHOOK_URL = os.getenv("FACEBOOK_WEBHOOK_URL") 
 HISTORY_FILE = "blog_history.json"
 TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
@@ -53,10 +53,9 @@ def generate_content():
     GENERICISM: Focus on engineering principles (seismic, wind, soil). Avoid unnecessary mentions of country or nationality names unless technically essential.
     
     SOCIAL TASK (linkedin_teaser_body): Write 1 professional technical paragraphs for a peer-level audience. 
-    RULES: No hashtags. No links. No titles. NEVER use dashes (-) or asterisks (*) for bullet points and any content. No bragging or humble-bragging. Pure technical insight only.
+    SOCIAL TASK (facebook_teaser): Write 1 engaging paragraph for a general technical community.
     
-    SOCIAL TASK (facebook_teaser): Write 1 engaging and informative paragraph for a general technical community.
-    RULES: Keep it professional but more accessible than LinkedIn. No hashtags allowed. No text after the link. No code snippets like [link] and the likes.
+    RULES: No hashtags. No links. No titles. Pure technical insight only.
     
     Already covered topics: {history_titles}
     """
@@ -103,43 +102,45 @@ def update_gallery(data, filename):
 
 def post_to_facebook(data, article_url):
     if not FACEBOOK_WEBHOOK_URL:
-        print("Facebook Webhook URL not set. Skipping social share.")
         return
 
     print("Triggering Facebook Page share via Webhook...")
-    
-    # Matching the LinkedIn signature perfectly
     clean_fb_post = f"{data.facebook_teaser}\n\nRead our article here: {article_url}"
-    payload = {
-        "teaser": clean_fb_post
-    }
+    payload = { "teaser": clean_fb_post }
     
     try:
         response = requests.post(FACEBOOK_WEBHOOK_URL, json=payload)
         if response.status_code in [200, 201, 202, 204]:
             print("Successfully triggered Facebook automation!")
-        else:
-            print(f"Facebook Webhook Trigger Failed: {response.status_code} - {response.text}")
     except Exception as e:
         print(f"Facebook Webhook Error: {e}")
 
 def main():
     try:
         data = generate_content()
-        # ... (article and gallery creation code) ...
         
-        # Share on LinkedIn
-        article_url = f"{WEBSITE_URL}/{filename}"
+        # 1. First, define the filename and date
+        date_str = datetime.datetime.today().strftime("%B %d, %Y")
+        filename = f"{data.slug}.html"
+        article_url = f"{WEBSITE_URL}/{filename}" # Now filename is defined!
+
+        # 2. Create Article Page
+        with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f: template = f.read()
+        html = template.replace("{{TITLE}}", data.title).replace("{{METADESC}}", data.meta_description).replace("{{DATE}}", date_str).replace("{{CONTENT}}", data.content_html)
+        with open(filename, 'w', encoding='utf-8') as f: f.write(html)
+        
+        # 3. Update Gallery
+        update_gallery(data, filename)
+
+        # 4. Share on LinkedIn
         if LINKEDIN_WEBHOOK_URL:
             clean_post = f"{data.linkedin_teaser_body}\n\nRead our article here: {article_url}"
             requests.post(LINKEDIN_WEBHOOK_URL, json={ "teaser": clean_post })
         
-        # Share on Facebook
-        post_to_facebook(data, article_url) 
+        # 5. Share on Facebook
+        post_to_facebook(data, article_url)
         
-        # ... (history and success logs) ...
-        
-        # History
+        # 6. History update
         history = get_history()
         history.append({"title": data.title, "slug": data.slug})
         with open(HISTORY_FILE, 'w', encoding='utf-8') as f: json.dump(history, f)
