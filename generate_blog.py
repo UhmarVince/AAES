@@ -16,11 +16,13 @@ class BlogData(BaseModel):
     excerpt: str
     content_html: str
     linkedin_teaser_body: str 
+    facebook_teaser: str  # Added this for FB
 
 # --- CONFIGURATION ---
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
-LINKEDIN_WEBHOOK_URL = os.getenv("LINKEDIN_WEBHOOK_URL") 
+LINKEDIN_WEBHOOK_URL = os.getenv("LINKEDIN_WEBHOOK_URL")
+FACEBOOK_WEBHOOK_URL = os.getenv("FACEBOOK_WEBHOOK_URL") # Added this
 HISTORY_FILE = "blog_history.json"
 TEMPLATE_FILE = "blog-template.html"
 GALLERY_FILE = "blog.html"
@@ -52,6 +54,9 @@ def generate_content():
     
     SOCIAL TASK (linkedin_teaser_body): Write 1 professional technical paragraphs for a peer-level audience. 
     RULES: No hashtags. No links. No titles. NEVER use dashes (-) or asterisks (*) for bullet points and any content. No bragging or humble-bragging. Pure technical insight only.
+    
+    SOCIAL TASK (facebook_teaser): Write 1 engaging and informative paragraph for a general technical community.
+    RULES: Keep it professional but more accessible than LinkedIn. No hashtags allowed. No text after the link.
     
     Already covered topics: {history_titles}
     """
@@ -96,6 +101,29 @@ def update_gallery(data, filename):
         return True
     return False
 
+def post_to_facebook(data, article_url):
+    if not FACEBOOK_WEBHOOK_URL:
+        print("Facebook Webhook URL not set. Skipping social share.")
+        return
+
+    print("Triggering Facebook Page share via Webhook...")
+    
+    payload = {
+        "title": data.title,
+        "teaser": data.facebook_teaser,
+        "url": article_url,
+        "meta_description": data.meta_description
+    }
+    
+    try:
+        response = requests.post(FACEBOOK_WEBHOOK_URL, json=payload)
+        if response.status_code in [200, 201, 202, 204]:
+            print("Successfully triggered Facebook automation!")
+        else:
+            print(f"Facebook Webhook Trigger Failed: {response.status_code} - {response.text}")
+    except Exception as e:
+        print(f"Facebook Webhook Error: {e}")
+
 def main():
     try:
         data = generate_content()
@@ -110,10 +138,13 @@ def main():
         update_gallery(data, filename)
 
         # Share on LinkedIn
+        article_url = f"{WEBSITE_URL}/{filename}"
         if LINKEDIN_WEBHOOK_URL:
-            article_url = f"{WEBSITE_URL}/{filename}"
             clean_post = f"{data.linkedin_teaser_body}\n\nRead our article here: {article_url}"
             requests.post(LINKEDIN_WEBHOOK_URL, json={ "teaser": clean_post })
+        
+        # Share on Facebook
+        post_to_facebook(data, article_url)
         
         # History
         history = get_history()
