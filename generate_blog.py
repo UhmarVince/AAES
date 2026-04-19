@@ -56,7 +56,7 @@ def generate_content():
     RULES: No hashtags. No links. No titles. NEVER use dashes (-) or asterisks (*) for bullet points and any content. No bragging or humble-bragging. Pure technical insight only.
     
     SOCIAL TASK (facebook_teaser): Write 1 engaging and informative paragraph for a general technical community.
-    RULES: Keep it professional but more accessible than LinkedIn. No hashtags allowed. No text after the link.
+    RULES: Keep it professional but more accessible than LinkedIn. No hashtags allowed. No text after the link. No code snippets like [link] and the likes.
     
     Already covered topics: {history_titles}
     """
@@ -108,11 +108,10 @@ def post_to_facebook(data, article_url):
 
     print("Triggering Facebook Page share via Webhook...")
     
+    # Matching the LinkedIn signature perfectly
+    clean_fb_post = f"{data.facebook_teaser}\n\nRead our article here: {article_url}"
     payload = {
-        "title": data.title,
-        "teaser": data.facebook_teaser,
-        "url": article_url,
-        "meta_description": data.meta_description
+        "teaser": clean_fb_post
     }
     
     try:
@@ -127,16 +126,8 @@ def post_to_facebook(data, article_url):
 def main():
     try:
         data = generate_content()
-        # Create Article
-        with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f: template = f.read()
-        date_str = datetime.datetime.today().strftime("%B %d, %Y")
-        html = template.replace("{{TITLE}}", data.title).replace("{{METADESC}}", data.meta_description).replace("{{DATE}}", date_str).replace("{{CONTENT}}", data.content_html)
-        filename = f"{data.slug}.html"
-        with open(filename, 'w', encoding='utf-8') as f: f.write(html)
+        # ... (article and gallery creation code) ...
         
-        # Update Gallery
-        update_gallery(data, filename)
-
         # Share on LinkedIn
         article_url = f"{WEBSITE_URL}/{filename}"
         if LINKEDIN_WEBHOOK_URL:
@@ -144,7 +135,9 @@ def main():
             requests.post(LINKEDIN_WEBHOOK_URL, json={ "teaser": clean_post })
         
         # Share on Facebook
-        post_to_facebook(data, article_url)
+        post_to_facebook(data, article_url) 
+        
+        # ... (history and success logs) ...
         
         # History
         history = get_history()
