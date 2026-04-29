@@ -218,10 +218,15 @@
 }
 
 /* Mobile Adjustments */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    #aaes-chat-wrapper {
+        bottom: 90px; /* Raised to avoid mobile browser address bars */
+        right: 20px;
+    }
     #aaes-chat-window {
         width: calc(100vw - 40px);
         right: -10px;
-        height: calc(100vh - 120px);
+        height: calc(100vh - 160px);
+        bottom: 80px;
     }
 }
