@@ -222,6 +222,9 @@ AAESChatbot.prototype.openWithTopic = function(topic) {
         case 'code compliance':
             greeting = "Engineering integrity starts with code compliance. What certifications or permits do you need help with today?";
             break;
+        case 'quote':
+            greeting = "I'd be happy to provide a custom quote for your project! Could you share a few details, such as the type of structure (e.g., residential, commercial) and its approximate size?";
+            break;
         default:
             greeting = AAES_CONFIG.initialGreeting;
     }
