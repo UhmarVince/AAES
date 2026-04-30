@@ -308,6 +308,9 @@ ul {
         grid-template-columns: 1fr;
         text-align: center;
     }
+    .hero-hook-text {
+        margin: 0 auto 2rem auto !important;
+    }
 }
 
 .overlay-content h2 {
@@ -561,8 +564,8 @@ ul {
 
 /* --- INFINITE MARQUEE --- */
 .marquee-container {
-    background: #000;
-    padding: 40px 0;
+    background: radial-gradient(circle at 50% 50%, rgba(56, 169, 255, 0.08), transparent 80%);
+    padding: 50px 0;
     border-top: 1px solid var(--aaes-glass-border);
     border-bottom: 1px solid var(--aaes-glass-border);
     overflow: hidden;
@@ -573,19 +576,25 @@ ul {
 .marquee-content {
     display: inline-flex;
     animation: scroll 40s linear infinite;
+    align-items: center;
 }
 
 .marquee-content img {
     height: 60px;
-    margin: 0 60px;
-    opacity: 0.5;
-    filter: grayscale(1);
-    transition: var(--transition-fast);
+    margin: 0 40px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
+    opacity: 0.9;
+    transition: var(--transition-base);
 }
 
 .marquee-content img:hover {
     opacity: 1;
-    filter: grayscale(0);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(56, 169, 255, 0.4);
 }
 
 @keyframes scroll {
@@ -841,3 +850,75 @@ ul {
     color: white !important;
 }
 
+/* --- NEW HERO COLLAGE --- */
+.hero-hook-text {
+    font-size: 1.1rem;
+    color: var(--aaes-gray);
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+    max-width: 90%;
+}
+
+.hero-image-collage {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collage-img {
+    position: absolute;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    object-fit: cover;
+}
+
+.collage-img:hover {
+    transform: scale(1.05);
+    z-index: 10 !important;
+}
+
+.collage-img-1 { /* Structural Registry (top right) */
+    width: 65%;
+    top: 5%;
+    right: 0%;
+    z-index: 1;
+    animation: float-slow 6s ease-in-out infinite;
+}
+
+.collage-img-2 { /* PEB House (bottom right) */
+    width: 60%;
+    bottom: 0%;
+    right: 15%;
+    z-index: 2;
+    animation: float-slow 7s ease-in-out infinite 1s;
+}
+
+.collage-img-3 { /* Supermarket (middle left) */
+    width: 45%;
+    top: 20%;
+    left: 0%;
+    z-index: 3;
+    animation: float-slow 5s ease-in-out infinite 2s;
+    background: white; /* Needs white bg if transparent */
+}
+
+@keyframes float-slow {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@media (max-width: 768px) {
+    .hero-image-collage {
+        height: 300px;
+        margin-top: 2rem;
+    }
+    .collage-img-1 { width: 70%; right: 5%; top: 0; }
+    .collage-img-2 { width: 70%; right: 5%; bottom: 0; }
+    .collage-img-3 { width: 55%; left: 5%; top: 25%; }
+}
