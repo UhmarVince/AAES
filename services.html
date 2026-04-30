@@ -69,14 +69,44 @@ src="https://www.facebook.com/tr?id=2364624894027755&ev=PageView&noscript=1"
 
     <!-- --- HERO SECTION --- -->
     <section class="hero-stats" style="padding-top: 150px; padding-bottom: 50px;">
-        <div class="stats-container">
-            <div class="stats-header" style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <h1 class="gradient-text" style="font-size: 3.5rem; margin-bottom: 20px;">Structural Engineering</h1>
-                <p style="font-size: 1.2rem; line-height: 1.8; color: var(--aaes-gray);">
+        <div class="stats-container" style="display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 1200px; margin: 0 auto;">
+            <div class="hero-media-wrapper" style="margin-bottom: 40px; position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); width: 100%; max-height: 400px;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, var(--aaes-night) 0%, transparent 50%); z-index: 1;"></div>
+                <img src="banner.jpg" alt="Structural Engineering Services" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) contrast(1.1);">
+            </div>
+            <div class="stats-header" style="max-width: 800px; z-index: 2; position: relative; margin-top: -80px;">
+                <h1 class="gradient-text" style="font-size: 4rem; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Structural Engineering</h1>
+                <p style="font-size: 1.2rem; line-height: 1.8; color: var(--aaes-white); margin-bottom: 40px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
                     Beyond stability, <strong>AAES</strong> integrates deeply into the design process to generate lasting value for a structure’s vision, 
                     cost, and legacy. We go beyond traditional engineering to align with your project goals. We leverage innovation and technical 
                     expertise to elevate both your structures and your communities.
                 </p>
+                
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <style>
+                        #hero-book-btn {
+                            animation: subtle-pulse 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+                            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                            transition: all 0.3s ease;
+                            border: 1px solid var(--aaes-blue);
+                        }
+                        #hero-book-btn:hover {
+                            transform: translateY(-5px) scale(1.05);
+                            background: rgba(56, 169, 255, 0.2);
+                        }
+                    </style>
+                    <button class="glass-button" id="hero-book-btn" onclick="window.open('https://calendly.com/aceronuhmarvince/consultation-structural-engineering-services', '_blank')">
+                        <div style="display: flex;align-items: center;gap: 10px;">
+                            <img src="logo.png" id="buttonLogo" style="width: 25px;">
+                            <span>Book a Call</span>
+                        </div>
+                    </button>
+                    <button class="glass-button alt" style="background: rgba(255, 255, 255, 0.1); border: 1px solid var(--aaes-glass-border);" onclick="if(window.aaesChat) { window.aaesChat.openWithTopic('quote'); } else { window.location.href='index.html#contact-section'; }">
+                        <div style="display: flex;align-items: center;gap: 10px;">
+                            <span>Get a Quote</span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -155,63 +185,56 @@ src="https://www.facebook.com/tr?id=2364624894027755&ev=PageView&noscript=1"
     <section style="padding: 100px 5%; background: rgba(255, 255, 255, 0.02); border-top: 1px solid var(--aaes-glass-border);">
         <h2 style="color: var(--aaes-white); font-size: 2.5rem; text-align: center; margin-bottom: 50px;">Structures We Design</h2>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Residential (Housing)</span>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <!-- Multilevel Buildings -->
+            <div class="service-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; min-height: auto; border-radius: 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--aaes-glass-border);">
+                <div style="width: 100%; height: 220px; overflow: hidden; position: relative;">
+                    <img src="MATINAOFFICEBLDG.jpg" alt="Multilevel Buildings" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, var(--aaes-night) 0%, transparent 100%);"></div>
+                </div>
+                <div style="padding: 30px; display: flex; flex-direction: column; flex-grow: 1;">
+                    <h3 style="color: var(--aaes-white); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--aaes-blue);">◈</span> Multilevel Buildings
+                    </h3>
+                    <p style="color: var(--aaes-gray); line-height: 1.6; font-size: 0.95rem;">
+                        Comprehensive structural design for mid- to high-rise commercial and office buildings. We ensure optimal load distribution, lateral stability against seismic forces, and highly efficient use of space.
+                    </p>
+                </div>
             </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Commercial Buildings</span>
+
+            <!-- Warehouse Buildings -->
+            <div class="service-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; min-height: auto; border-radius: 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--aaes-glass-border);">
+                <div style="width: 100%; height: 220px; overflow: hidden; position: relative;">
+                    <img src="SAVEMORE_01.jpg" alt="Warehouse Buildings" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, var(--aaes-night) 0%, transparent 100%);"></div>
+                </div>
+                <div style="padding: 30px; display: flex; flex-direction: column; flex-grow: 1;">
+                    <h3 style="color: var(--aaes-white); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--aaes-blue);">◈</span> Warehouse Buildings
+                    </h3>
+                    <p style="color: var(--aaes-gray); line-height: 1.6; font-size: 0.95rem;">
+                        Specialized Pre-Engineered Building (PEB) and structural steel designs for large-scale logistics centers. Focused on maximizing clear spans, speed of erection, and total cost-efficiency.
+                    </p>
+                </div>
             </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">School & Institutional</span>
+
+            <!-- Residential Houses -->
+            <div class="service-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; min-height: auto; border-radius: 20px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--aaes-glass-border);">
+                <div style="width: 100%; height: 220px; overflow: hidden; position: relative;">
+                    <img src="TALISAY RESIDENCE.jpg" alt="Residential Houses" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, var(--aaes-night) 0%, transparent 100%);"></div>
+                </div>
+                <div style="padding: 30px; display: flex; flex-direction: column; flex-grow: 1;">
+                    <h3 style="color: var(--aaes-white); font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--aaes-blue);">◈</span> Residential Houses
+                    </h3>
+                    <p style="color: var(--aaes-gray); line-height: 1.6; font-size: 0.95rem;">
+                        Safe, durable, and architecturally compliant structural frameworks for single-family homes and luxury villas. We turn your dream house into a resilient reality that lasts generations.
+                    </p>
+                </div>
             </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Office Complexes</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Retaining Walls</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Industrial Support Structures</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Mixed-Use Developments</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Warehouse & Logistics Centers</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Healthcare & Hospitals</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Hospitality (Hotels & Resorts)</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Retail & Shopping Centers</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Infrastructure (Bridges & Culverts)</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Telecommunications Infrastructures</span>
-            </div>
-            <div class="service-card" style="min-height: 80px; padding: 20px; flex-direction: row; justify-content: flex-start; gap: 15px;">
-                <span style="color: var(--aaes-blue); font-size: 1.2rem;">◈</span>
-                <span style="color: var(--aaes-white); font-weight: 500;">Retrofitting & Seismic Strengthening</span>
-            </div>
+
+
         </div>
     </section>
 
